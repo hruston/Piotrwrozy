@@ -5,23 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarot & Doradztwo Duchowe - Cennik</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <style>
+        /* FIX DLA IOS: Tło w osobnym kontenerze */
+        .bg-fixed-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Główne tło przeniesione tutaj */
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                              url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Pod wszystkim */
+            transform: translateZ(0); /* Wsparcie akceleracji sprzętowej */
+            -webkit-transform: translateZ(0);
+        }
+
         body {
             margin: 0;
             padding: 0;
-            /* Wspólne tło dla całej strony, zablokowane w miejscu */
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                              url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
+            background-color: #000; /* Kolor bazowy */
             color: #e0ce9e;
             font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* --- SEKCJA PRESENTATION (Przezroczysta) --- */
         .presentation {
-            height: 500px;
+            height: 550px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -29,6 +45,7 @@
             text-align: center;
             position: relative;
             z-index: 2;
+            background: transparent;
         }
 
         .profile-img {
@@ -46,9 +63,9 @@
             font-family: 'Cinzel', serif;
             font-weight: 700;
             text-transform: uppercase;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
             letter-spacing: 4px;
-            font-size: clamp(20px, 5vw, 26px);
+            font-size: clamp(22px, 5vw, 28px);
         }
         
         .profile-bio {
@@ -56,20 +73,21 @@
             font-family: 'Cinzel', serif;
             letter-spacing: 2px;
             font-size: clamp(12px, 4vw, 14px);
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
             max-width: 600px;
             padding: 5px 20px;
+            line-height: 1.6;
         }
 
         /* --- CENNIK (Nieprzezroczysta karta nachodząca) --- */
         .cennik-wrapper {
             position: relative;
             z-index: 10;
-            background-color: #0b0b0b; /* Solidne tło zakrywające obraz pod spodem */
-            box-shadow: 0 0 50px rgba(0,0,0,1);
+            background-color: #0b0b0b; 
+            box-shadow: 0 0 60px rgba(0,0,0,1);
             border-top: 1px solid rgba(224, 206, 158, 0.3);
             border-bottom: 1px solid rgba(224, 206, 158, 0.3);
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .stars-overlay {
@@ -77,7 +95,7 @@
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.4;
+            opacity: 0.3;
             z-index: -1;
         }
 
@@ -88,65 +106,80 @@
             text-align: center;
         }
 
-        /* --- SOCIAL MEDIA (Znowu przezroczyste, odsłaniające tło body) --- */
+        /* --- SOCIAL MEDIA (Przezroczyste na dole) --- */
         .social-reveal-section {
             position: relative;
             z-index: 2;
-            height: 500px;
+            padding: 120px 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: transparent; /* Kluczowe: brak tła, widać body */
+            background: transparent;
         }
 
         .social-title {
             font-family: 'Cinzel', serif;
-            font-size: 24px;
+            font-size: 26px;
             color: white;
-            margin-bottom: 40px;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: 50px;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         .social-buttons {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .social-btn {
-            padding: 15px 30px;
+            padding: 16px 32px;
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 14px;
-            border-radius: 30px;
-            transition: transform 0.3s ease;
+            border-radius: 50px;
+            transition: all 0.3s ease;
             color: white;
-            min-width: 150px;
-            text-align: center;
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .social-btn i {
+            font-size: 18px;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            filter: brightness(1.1);
         }
 
         .fb { background-color: #1877F2; }
-        .ig { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         .wa { background-color: #25D366; }
 
-        /* --- STYLE ELEMENTÓW --- */
+        /* --- STYLIZACJA TEKSTU CENNIKA --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         h1 { font-family: 'Cinzel', serif; letter-spacing: 5px; font-size: 22px; margin-bottom: 40px; }
-        .main-title { font-family: 'Cinzel', serif; font-size: 35px; letter-spacing: 8px; margin: 20px 0; }
-        h2 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 4px; margin: 50px 0 20px; opacity: 0.8; }
-        .item { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; font-size: 13px; letter-spacing: 1px; }
-        .dots { flex-grow: 1; border-bottom: 1px dotted rgba(224, 206, 158, 0.4); margin: 0 10px 4px; }
-        .price { font-weight: bold; }
-        .footer-info { margin-top: 60px; font-size: 11px; letter-spacing: 1px; line-height: 2; }
+        .main-title { font-family: 'Cinzel', serif; font-size: clamp(30px, 8vw, 40px); letter-spacing: 10px; margin: 20px 0; }
+        h2 { font-family: 'Cinzel', serif; font-size: 15px; letter-spacing: 4px; margin: 60px 0 25px; opacity: 0.9; color: #fff; }
+        .item { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px; font-size: 13px; letter-spacing: 1.5px; }
+        .dots { flex-grow: 1; border-bottom: 1px dotted rgba(224, 206, 158, 0.5); margin: 0 12px 5px; }
+        .price { font-weight: bold; color: #fff; }
+        .footer-info { margin-top: 80px; font-size: 12px; letter-spacing: 1.5px; line-height: 2.2; }
     </style>
 </head>
 <body>
+
+    <div class="bg-fixed-layer"></div>
 
     <header class="presentation">
         <img src="https://raw.githubusercontent.com/hruston/WatchSmart/refs/heads/main/b5aef392-b7e7-4b25-82af-9132484e733b.jpg" alt="Piotr" class="profile-img">
@@ -174,7 +207,7 @@
             <div class="item reveal"><span>Szybka kontrola witalności</span><span class="dots"></span><span class="price">40 ZŁ</span></div>
 
             <div class="footer-info reveal">
-                KONTO: 61 1240 3187 1111 0011 1601 5894
+                KONTO BANKOWE: 61 1240 3187 1111 0011 1601 5894
             </div>
         </div>
     </div>
@@ -182,9 +215,15 @@
     <div class="social-reveal-section">
         <div class="social-title reveal">ZNAJDŹ MNIE W SIECI</div>
         <div class="social-buttons reveal">
-            <a href="https://www.facebook.com/share/g/1CNKUNN35h/?mibextid=wwXIfr" target="_blank" class="social-btn fb">FACEBOOK</a>
-            <a href="https://www.instagram.com/petter_tarot" target="_blank" class="social-btn ig">INSTAGRAM</a>
-            <a href="#" class="social-btn wa">WHATSAPP</a>
+            <a href="https://www.facebook.com/share/g/1CNKUNN35h/?mibextid=wwXIfr" target="_blank" class="social-btn fb">
+                <i class="fa-brands fa-facebook-f"></i> FACEBOOK
+            </a>
+            <a href="https://www.instagram.com/petter_tarot" target="_blank" class="social-btn ig">
+                <i class="fa-brands fa-instagram"></i> INSTAGRAM
+            </a>
+            <a href="https://wa.me/48123456789" target="_blank" class="social-btn wa">
+                <i class="fa-brands fa-whatsapp"></i> WHATSAPP
+            </a>
         </div>
     </div>
 
@@ -200,8 +239,7 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal();
+        window.addEventListener("load", reveal); // Dodatkowe wywołanie po załadowaniu obrazków
     </script>
 </body>
 </html>
-
