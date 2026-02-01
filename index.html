@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot & Doradztwo Duchowe - Cennik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b0b0b;
+            color: #e0ce9e;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- SEKCJA PRESENTATION (STAŁA) --- */
+        .presentation {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 450px;
+            background-color: #404040;
+            background-image: url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/%E2%80%94Pngtree%E2%80%94starry%20night%20sky_5617491.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: 0px -100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e0ce9e;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .profile-name {
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 4px;
+            font-size: clamp(18px, 5vw, 24px);
+        }
+        
+        .profile-bio {
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: clamp(12px, 5vw, 14px);
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            max-width: 700px;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+
+        /* --- KONTENER CENNIKA --- */
+        .cennik-wrapper {
+            position: relative;
+            z-index: 10;
+            margin-top: 450px; 
+            background-color: #0b0b0b;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9); /* Cień na dole, by oddzielić od białego tła */
+            border-top: 2px solid rgba(224, 206, 158, 0.4);
+            padding-bottom: 50px;
+        }
+
+        .stars-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            background-attachment: fixed;
+            background-repeat: repeat;
+            opacity: 0.6;
+        }
+
+        .cennik-container {
+            max-width: 650px;
+            width: 90%;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        /* --- NOWA SEKCJA SOCIAL MEDIA (BIAŁA) --- */
+        .social-reveal-section {
+            position: relative;
+            z-index: 5; /* Pomiędzy prezentacją a cennikiem */
+            height: 500px;
+            background-color: #ffffff;
+            color: #0b0b0b;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .social-title {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .social-btn {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: white;
+            min-width: 150px;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .fb { background-color: #1877F2; }
+        .ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .wa { background-color: #25D366; }
+
+        /* --- EFEKT REVEAL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 { font-family: 'Cinzel', serif; letter-spacing: 5px; font-size: clamp(18px, 5vw, 24px); margin-bottom: 40px; text-transform: uppercase; }
+        .main-title { font-family: 'Cinzel', serif; font-size: clamp(28px, 8vw, 40px); margin: 20px 0; letter-spacing: 10px; }
+        .main-title::before, .main-title::after { content: "—"; margin: 0 15px; }
+        h2 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 4px; margin: 50px 0 25px; text-transform: uppercase; opacity: 0.9; }
+        .item { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; }
+        .dots { flex-grow: 1; border-bottom: 1px dotted rgba(224, 206, 158, 0.5); margin: 0 10px 4px 10px; }
+        .price { font-weight: bold; }
+        .footer-info { margin-top: 80px; font-size: 12px; line-height: 2; letter-spacing: 1.5px; }
+        .bank-account { margin-top: 30px; font-weight: 300; letter-spacing: 2px; }
+        .gold-accent { width: 120px; height: 2px; background: linear-gradient(90deg, transparent, #e0ce9e, transparent); margin: 50px auto 0; }
+    </style>
+</head>
+<body>
+
+   <header class="presentation">
+    <img src="https://raw.githubusercontent.com/hruston/WatchSmart/refs/heads/main/b5aef392-b7e7-4b25-82af-9132484e733b.jpg" alt="Piotr" class="profile-img">
+    <div class="profile-name">Piotr</div>
+    <div class="profile-bio">Jestem tarocistą i medium.</div>
+    <div class="profile-bio">Łączę światy, odczytując szeptane przekazy.</div>
+</header>
+
+    <div class="cennik-wrapper">
+        <div class="stars-overlay"></div>
+        <div class="cennik-container">
+            <h1 class="reveal">Tarot & Doradztwo Duchowe</h1>
+            <div class="main-title reveal">CENNIK</div>
+
+            <h2 class="reveal">Pytania i Karty</h2>
+            <div class="item-list">
+                <div class="item reveal"><span>1 Pytanie do kart</span><span class="dots"></span><span class="price">11 ZŁ</span></div>
+                <div class="item reveal"><span>1 Szczegółowe pytanie</span><span class="dots"></span><span class="price">13 ZŁ</span></div>
+                <div class="item reveal"><span>5 Pytań do kart</span><span class="dots"></span><span class="price">50 ZŁ</span></div>
+                <div class="item reveal"><span>Karta Rady</span><span class="dots"></span><span class="price">5 ZŁ</span></div>
+                <div class="item reveal"><span>1 Pytanie do zmarłego</span><span class="dots"></span><span class="price">35 ZŁ</span></div>
+            </div>
+
+            <h2 class="reveal">Analiza Energii</h2>
+            <div class="item-list">
+                <div class="item reveal"><span>Analiza Czakr</span><span class="dots"></span><span class="price">30 ZŁ</span></div>
+                <div class="item reveal"><span>Pełna analiza czakr</span><span class="dots"></span><span class="price">45 ZŁ</span></div>
+                <div class="item reveal"><span>Szybka kontrola witalności</span><span class="dots"></span><span class="price">40 ZŁ</span></div>
+            </div>
+
+            <div class="footer-info reveal">
+                OBSERWUJ NA INSTAGRAMIE: <strong>PETTER_TAROT</strong>
+                <div class="bank-account">KONTO BANKOWE: 61 1240 3187 1111 0011 1601 5894</div>
+            </div>
+            <div class="gold-accent reveal"></div>
+        </div>
+    </div>
+
+    <div class="social-reveal-section">
+        <div class="social-title reveal">ZNAJDŹ MNIE W SIECI</div>
+        <div class="social-buttons reveal">
+            <a href="#" class="social-btn fb">FACEBOOK</a>
+            <a href="https://www.instagram.com/petter_tarot" class="social-btn ig">INSTAGRAM</a>
+            <a href="#" class="social-btn wa">WHATSAPP</a>
+        </div>
+    </div>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>
