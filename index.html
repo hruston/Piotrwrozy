@@ -25,6 +25,80 @@
             -webkit-transform: translateZ(0);
         }
 
+        /* Ikonka menu */
+        .menu-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+        .menu-icon img {
+            width: 100%;
+            /* Złoty odcień dla ikonki */
+            filter: invert(85%) sepia(20%) saturate(500%) hue-rotate(10deg);
+        }
+        
+        .menu-icon:hover {
+        transform: scale(1.1) rotate(5deg);
+        filter: drop-shadow(0 0 8px rgba(224, 206, 158, 0.8));
+        }
+
+        /* Wysuwany panel boczny */
+        #side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 250px;
+            height: 100%;
+            background: rgba(11, 11, 11, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1001;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px;
+            border-right: 1px solid rgba(224, 206, 158, 0.2);
+            
+        }
+        #side-menu.active { left: 0; }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 35px;
+            color: #e0ce9e;
+            cursor: pointer;
+        }
+
+        .nav-links { list-style: none; padding: 0; margin: 0; }
+        .nav-links li { padding: 15px 40px; }
+        .nav-links a {
+            text-decoration: none;
+            color: #e0ce9e;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px #e0ce9e; }
+        
+
+        /* Przyciemnienie tła */
+        .menu-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+        }
+        .menu-overlay.active { display: block; }
+        
+        /* Płynne przewijanie */
+        html { scroll-behavior: smooth; }
+        
         body {
             margin: 0;
             padding: 0;
@@ -43,9 +117,12 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
-            z-index: 2;
+            position: sticky;
+            top: 0;
+            z-index: 1;
             background: transparent;
+            transition: opacity 0.2s ease-out; /* Płynne znikanie */
+            will-change: opacity; /* Optymalizacja wydajności */
         }
 
         .profile-img {
@@ -84,7 +161,7 @@
             position: relative;
             z-index: 10;
             background-color: #0b0b0b; 
-            box-shadow: 0 0 60px rgba(0,0,0,1);
+            box-shadow: 0 -30px 60px rgba(0,0,0,0.9);
             border-top: 1px solid rgba(224, 206, 158, 0.3);
             border-bottom: 1px solid rgba(224, 206, 158, 0.3);
             padding: 100px 0;
@@ -121,7 +198,6 @@
         .social-title {
             font-family: 'Cinzel', serif;
             font-size: 26px;
-            justify-content: center;
             color: white;
             margin-bottom: 50px;
             letter-spacing: 4px;
@@ -176,10 +252,33 @@
         .dots { flex-grow: 1; border-bottom: 1px dotted rgba(224, 206, 158, 0.5); margin: 0 12px 5px; }
         .price { font-weight: bold; color: #fff; }
         .footer-info { margin-top: 80px; font-size: 12px; letter-spacing: 1.5px; line-height: 2.2; }
+        
+        @media (max-width: 480px) {
+        #side-menu {
+        width: 40%; /* Menu zajmie 40% szerokości ekranu na telefonie */
+    }
+    
+}
     </style>
 </head>
 <body>
+    
+    <div class="menu-icon" onclick="toggleMenu()">
+        <img src="https://images.icon-icons.com/3871/PNG/512/menu_icon_244496.png" alt="Menu">
+    </div>
 
+    <nav id="side-menu">
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="toggleMenu()">Start</a></li>
+            <li><a href="#cennik" onclick="toggleMenu()">Cennik</a></li>
+            <li><a href="#kontakt" onclick="toggleMenu()">Kontakt</a></li>
+        </ul>
+    </nav>
+    <div class="menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
+
+    <div class="bg-fixed-layer"></div>
+    
     <div class="bg-fixed-layer"></div>
 
     <header class="presentation">
@@ -189,7 +288,7 @@
         <div class="profile-bio">Łączę światy, odczytując szeptane przekazy.</div>
     </header>
 
-    <div class="cennik-wrapper">
+    <div class="cennik-wrapper" id="cennik">
         <div class="stars-overlay"></div>
         <div class="cennik-container">
             <h1 class="reveal">Tarot & Doradztwo Duchowe</h1>
@@ -213,7 +312,7 @@
         </div>
     </div>
 
-    <div class="social-reveal-section">
+    <div class="social-reveal-section" id="kontakt">
         <div class="social-title reveal">ZNAJDŹ MNIE W SIECI</div>
         <div class="social-buttons reveal">
             <a href="https://www.facebook.com/share/g/1CNKUNN35h/?mibextid=wwXIfr" target="_blank" class="social-btn fb">
@@ -242,6 +341,37 @@
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal); // Dodatkowe wywołanie po załadowaniu obrazków
     </script>
+    <script>
+        function toggleMenu() {
+            document.getElementById("side-menu").classList.toggle("active");
+            document.getElementById("menu-overlay").classList.toggle("active");
+        }
+
+        function reveal() {
+            // ... Twój istniejący kod funkcji reveal ...
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+    </script>
+    
+    <script>
+    window.addEventListener('scroll', function() {
+    const presentation = document.querySelector('.presentation');
+    const cennik = document.querySelector('.cennik-wrapper');
+    
+    // Obliczamy moment, w którym cennik zaczyna nachodzić na prezentację
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let fadeStart = 50; // Punkt, w którym zaczyna znikać (w px)
+    let fadeEnd = 600;   // Punkt, w którym całkowicie znika (w px)
+    
+    let opacity = 1 - (scrollTop - fadeStart) / (fadeEnd - fadeStart);
+    
+    if (opacity > 1) opacity = 1;
+    if (opacity < 0) opacity = 0;
+    
+    presentation.style.opacity = opacity;
+});
+</script>
+
 </body>
 </html>
-
