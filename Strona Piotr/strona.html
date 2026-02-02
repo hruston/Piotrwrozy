@@ -142,9 +142,6 @@
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-display: flex;
-flex-direction: column;
-min-height: 100vh;
         }
 
         /* --- SEKCJA PRESENTATION (Przezroczysta) --- */
@@ -321,7 +318,6 @@ min-height: 100vh;
             justify-content: center;
             align-items: center;
             background: transparent;
-flex: 1;
         }
 
         .social-title {
@@ -383,29 +379,27 @@ flex: 1;
         }
         
         .footer-strip {
-flex-shrink: 0;
         position: relative;
         z-index: 10;
         background-color: #0b0b0b; 
         border-top: 1px solid rgba(224, 206, 158, 0.3);
-        height: 30px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden; /* Aby gwiazdy nie wystawały */
         box-shadow: 0 -20px 40px rgba(0,0,0,0.9); 
         border-top: 1px solid rgba(224, 206, 158, 0.3);
-        min-height: 50px;
+        height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-
     }
 
     .footer-text {
         font-family: 'Cinzel', serif;
-        font-size: 8px;
+        font-size: 10px;
         letter-spacing: 2px;
         color: rgba(224, 206, 158, 0.6);
         z-index: 2;
@@ -516,7 +510,7 @@ flex-shrink: 0;
     
     <footer class="footer-strip">
     <div class="stars-overlay"></div>
-    <div class="footer-text">© 2026 PIOTR KOWALSKI</div>
+    <div class="footer-text">© 2026 PIOTR KOWALSKI • WSZELKIE PRAWA ZASTRZEŻONE</div>
     </footer>
     <script>
         function reveal() {
@@ -566,3 +560,4 @@ flex-shrink: 0;
 
 </body>
 </html>
+
