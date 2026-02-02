@@ -196,10 +196,12 @@
             position: relative;
             z-index: 10;
             background-color: #0b0b0b; 
-            box-shadow: 0 -30px 60px rgba(0,0,0,0.9);
+            box-shadow: 0 -30px 60px rgba(0,0,0,0.9), 
+                         0 30px 60px rgba(0,0,0,0.9);
             border-top: 1px solid rgba(224, 206, 158, 0.3);
             border-bottom: 1px solid rgba(224, 206, 158, 0.3);
             padding: 100px 0;
+            
         }
 
         .stars-overlay {
@@ -277,7 +279,7 @@
 
         .fb { background-color: #1877F2; }
         .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .sh { background-color: #FFFC00; color: #000 !important; }
+        .sh { background-color: #FFFC00; color: #000 !important;}
         .bk { background-color: #05A862;}
         
         
@@ -358,6 +360,32 @@
             line-height: 2.2;
         }
         
+        .footer-strip {
+        position: relative;
+        z-index: 10;
+        background-color: #0b0b0b; 
+        border-top: 1px solid rgba(224, 206, 158, 0.3);
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Aby gwiazdy nie wystawały */
+        box-shadow: 0 -20px 40px rgba(0,0,0,0.9); 
+        border-top: 1px solid rgba(224, 206, 158, 0.3);
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .footer-text {
+        font-family: 'Cinzel', serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: rgba(224, 206, 158, 0.6);
+        z-index: 2;
+    }
         @media (max-width: 480px) {
         #side-menu {
         width: 65%; /* Menu zajmie 65% szerokości ekranu na telefonie */
@@ -462,7 +490,11 @@
             </a>
         </div>
     </div>
-
+    
+    <footer class="footer-strip">
+    <div class="stars-overlay"></div>
+    <div class="footer-text">© 2026 PIOTR KOWALSKI • WSZELKIE PRAWA ZASTRZEŻONE</div>
+    </footer>
     <script>
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
@@ -511,4 +543,3 @@
 
 </body>
 </html>
-
