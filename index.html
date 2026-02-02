@@ -321,7 +321,6 @@ min-height: 100vh;
             justify-content: center;
             align-items: center;
             background: transparent;
-flex: 1;
         }
 
         .social-title {
@@ -383,25 +382,31 @@ flex: 1;
         }
         
         .footer-strip {
-flex-shrink: 0;
-        position: relative;
-        z-index: 10;
-        background-color: #0b0b0b; 
-        border-top: 1px solid rgba(224, 206, 158, 0.3);
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden; /* Aby gwiazdy nie wystawały */
-        box-shadow: 0 -20px 40px rgba(0,0,0,0.9); 
-        border-top: 1px solid rgba(224, 206, 158, 0.3);
-        min-height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
+    /* 1. Pozycjonowanie i hierarchia */
+    position: relative;
+    z-index: 100;           /* Bardzo wysoki priorytet, aby być nad tłem */
+    margin-top: auto;       /* Popycha stopkę na sam dół */
+    flex-shrink: 0;
 
-    }
+    /* 2. Wygląd i wymiary */
+    background-color: #0b0b0b; 
+    border-top: 1px solid rgba(224, 206, 158, 0.3);
+    min-height: 80px;       /* Zwiększona wysokość dla lepszego efektu */
+    
+    /* 3. Wyrównanie tekstu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* 4. KLUCZ: Wypełnienie przestrzeni pod stopką */
+    /* Ten cień o ogromnym zasięgu w dół (500px) sprawia, że 
+       nawet przy mocnym "szarpnięciu" strony na iPhone, 
+       pod stopką widać tylko czarny kolor, a nie galaktykę */
+    box-shadow: 0 500px 0 500px #0b0b0b; 
+    
+    /* Zabezpieczenie przed prześwitami */
+    overflow: visible; 
+}
 
     .footer-text {
         font-family: 'Cinzel', serif;
@@ -410,6 +415,18 @@ flex-shrink: 0;
         color: rgba(224, 206, 158, 0.6);
         z-index: 2;
     }
+        .bg-fixed-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                      url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
         @media (max-width: 480px) {
         #side-menu {
         width: 65%; /* Menu zajmie 65% szerokości ekranu na telefonie */
@@ -566,4 +583,5 @@ flex-shrink: 0;
 
 </body>
 </html>
+
 
