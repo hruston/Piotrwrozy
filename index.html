@@ -97,6 +97,40 @@
         }
         .menu-overlay.active { display: block; }
         
+        /* od tąd*/
+        .nav-bk {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: #05A862; /* Neonowa zieleń BuyCoffee */
+        color: #000 !important;    /* Czarny tekst dla lepszego kontrastu */
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        width: 80%;               /* Szerokość dopasowana do wnętrza menu */
+        margin: 20px auto;        /* Marginesy dla wyśrodkowania */
+        box-shadow: 0 4px 15px rgba(0, 255, 164, 0.3);
+        }
+
+        .nav-bk:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 255, 164, 0.5);
+        align-content:  filter: brightness(1.1);
+        }
+
+        /* Poprawka dla elementu listy, żeby nie wymuszał lewego wyrównania */
+        #side-menu .nav-links li.bk-wrapper {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        } /* Przycisk buycoffe do tąd ma style 
+        
         /* Płynne przewijanie */
         html { scroll-behavior: smooth; }
         
@@ -244,7 +278,9 @@
         .fb { background-color: #1877F2; }
         .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         .wa { background-color: #25D366; }
-
+        .bk { background-color: #05A862;}
+        
+        
         /* --- STYLIZACJA TEKSTU CENNIKA --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -280,6 +316,12 @@
             <li><a href="https://bornself.pl/" target="_blank">Kalkulator Numerologiczny</a></li>
             <li><a href="https://ehoroskop.pl/ascendant" target="_blank">Kalkulator Ascendentu</a></li>
             <li><a href="https://onlygames.io/gry/kulki/bubble-witch-saga-magical-shooter.html" target="_blank">Zagraj w Bubble Witch Saga</a></li>
+           <li class="bk-wrapper">
+            <a href="https://buycoffee.to/petter_tarot" target="_blank" class="nav-bk">
+                <i class="fas fa-coffee"></i> POSTAW KAWĘ
+            </a>
+        </li>
+</li>
         </ul>
     </nav>
     <div class="menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
@@ -349,6 +391,9 @@
             </a>
             <a href="https://wa.me/46793417280" target="_blank" class="social-btn wa">
                 <i class="fa-brands fa-whatsapp"></i> WHATSAPP
+            </a>
+            <a href="https://buycoffee.to/petter_tarot" target="_blank" class="social-btn bk">
+            <i class="fas fa-coffee"></i> POSTAW KAWĘ
             </a>
         </div>
     </div>
