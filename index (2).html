@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>Tarot & Doradztwo Duchowe - Cennik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* FIX DLA IOS: Tło w osobnym kontenerze */
+        .bg-fixed-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Główne tło przeniesione tutaj */
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                              url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Pod wszystkim */
+            transform: translateZ(0); /* Wsparcie akceleracji sprzętowej */
+            -webkit-transform: translateZ(0);
+        }
+
+        /* Ikonka menu */
+        .menu-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+        .menu-icon img {
+            width: 100%;
+            /* Złoty odcień dla ikonki */
+            filter: invert(85%) sepia(20%) saturate(500%) hue-rotate(10deg);
+        }
+        
+        .menu-icon:hover {
+        transform: scale(1.1) rotate(5deg);
+        filter: drop-shadow(0 0 8px rgba(224, 206, 158, 0.8));
+        }
+
+        /* Wysuwany panel boczny */
+        #side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 250px;
+            height: 100%;
+            background: rgba(11, 11, 11, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1001;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px;
+            border-right: 1px solid rgba(224, 206, 158, 0.2);
+            
+        }
+        #side-menu.active { left: 0; }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 35px;
+            color: #e0ce9e;
+            cursor: pointer;
+        }
+
+        .nav-links { list-style: none; padding: 0; margin: 0; }
+        .nav-links li { padding: 15px 40px; }
+        .nav-links a {
+            text-decoration: none;
+            color: #e0ce9e;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px #e0ce9e; }
+        
+
+        /* Przyciemnienie tła */
+        .menu-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+        }
+        .menu-overlay.active { display: block; }
+        
+        /* od tąd*/
+        .nav-bk {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: #05A862; /* Neonowa zieleń BuyCoffee */
+        color: #000 !important;    /* Czarny tekst dla lepszego kontrastu */
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        width: 80%;               /* Szerokość dopasowana do wnętrza menu */
+        margin: 20px auto;        /* Marginesy dla wyśrodkowania */
+        box-shadow: 0 4px 15px rgba(0, 255, 164, 0.3);
+        }
+
+        .nav-bk:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 255, 164, 0.5);
+        filter: brightness(1.1);
+        }
+
+        /* Poprawka dla elementu listy, żeby nie wymuszał lewego wyrównania */
+        #side-menu .nav-links li.bk-wrapper {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        } /* Przycisk buycoffe do tąd ma style 
+        
+        /* Płynne przewijanie */
+        html { scroll-behavior: smooth; }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Kolor bazowy */
+            color: #e0ce9e;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- SEKCJA PRESENTATION (Przezroczysta) --- */
+        .presentation {
+            height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: transparent;
+            transition: opacity 0.2s ease-out; /* Płynne znikanie */
+            will-change: opacity; /* Optymalizacja wydajności */
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e0ce9e;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            object-position: center 35%;
+        }
+
+        .profile-name {
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            letter-spacing: 4px;
+            font-size: clamp(22px, 5vw, 28px);
+        }
+        
+        .profile-bio {
+            color: white;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            font-size: clamp(18px, 4vw, 14px);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            max-width: 600px;
+            padding: 5px 20px;
+            line-height: 1.6;
+        }
+
+        /* --- CENNIK (Nieprzezroczysta karta nachodząca) --- */
+        .cennik-wrapper {
+            position: relative;
+            z-index: 10;
+            background-color: #0b0b0b; 
+            box-shadow: 0 -30px 60px rgba(0,0,0,0.9), 
+                         0 30px 60px rgba(0,0,0,0.9);
+            border-top: 1px solid rgba(224, 206, 158, 0.3);
+            border-bottom: 1px solid rgba(224, 206, 158, 0.3);
+            padding: 100px 0;
+            
+        }
+        
+         /* --- STYLIZACJA TEKSTU CENNIKA --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(38px) scale(0.985);
+            filter: blur(6px);
+            transition:
+                opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 1s cubic-bezier(0.22, 1, 0.36, 1);
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: opacity, transform, filter;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        .item.reveal {
+            transform: translateY(28px) scale(0.99);
+        }
+
+        h1.reveal,
+        .main-title.reveal,
+        h2.reveal,
+        .footer-info.reveal,
+        .social-title.reveal {
+            transition-duration: 0.62s;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 5px;
+            font-size: 22px;
+            margin-bottom: 40px;
+        }
+        
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(30px, 8vw, 40px);
+            letter-spacing: 10px;
+            margin: 20px 0;
+        }
+        
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            letter-spacing: 4px;
+            margin: 60px 0 25px;
+            opacity: 0.9;
+            color: #fff;
+        }
+        
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin-bottom: 14px;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 8px 10px;
+            border-radius: 5px;
+        }
+
+            .item-top {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: end;
+            column-gap: 10px;
+        }
+        
+        /* Styl dla nazw usług i cen */
+        .item-top span:not(.dots) {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        }
+
+        /* Podświetlenie TYLKO tekstu po najechaniu */
+        .item:hover .item-top span:not(.dots) {
+        color: #e0ce9e;
+        text-shadow: 0 0 10px rgba(224, 206, 158, 0.9);
+        }
+
+        /* Opcjonalne delikatne uniesienie samego tekstu */
+        .item-top span:not(.dots):hover {
+        transform: translateY(-2px);
+        }
+
+        /* Kropki pozostają statyczne lub lekko przygaszone */
+        .dots {
+    border-bottom: 1px dotted rgba(224, 206, 158, 0.3);
+    transform: translateY(-4px);
+}
+        
+        .price {
+            font-weight: bold;
+            color: #fff;
+            white-space: nowrap;
+        }
+        
+        .desc {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 6px;
+    margin-left: 0;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    text-align: left;
+    max-width: 75%;
+}
+       
+
+     .stars-overlay {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 0; 
+    
+    background-image: 
+        url('https://www.transparenttextures.com/patterns/stardust.png'), 
+        /* Zmniejszono z 0.2 na 0.1 */
+        radial-gradient(circle at top right, rgba(224, 206, 158, 0.1), transparent 400px),
+        /* Zmniejszono z 0.15 na 0.07 */
+        radial-gradient(circle at bottom left, rgba(224, 206, 158, 0.07), transparent 400px);
+}
+        
+
+        .cennik-container {
+            max-width: 650px;
+            margin: 0 auto;
+            width: 90%;
+            text-align: center;
+        }
+        
+        
+         .gold-accent {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e0ce9e, transparent);
+            margin: 20px auto 0;
+        }
+
+
+        .slider-tabs {
+            position: relative;
+            z-index: 3;
+            max-width: 1080px;
+            width: min(92%, 1080px);
+            margin: -90px auto 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            align-items: end;
+            gap: 48px;
+        }
+
+        .slider-tab {
+            background: transparent;
+            border: none;
+            color: #e0ce9e;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            padding: 10px 20px;
+            position: relative;
+        }
+
+        .slider-tab span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slider-tab::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 220px;
+            max-width: 82%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(224, 206, 158, 0.8), transparent);
+            transform: translateX(-50%);
+        }
+
+        .slider-tab:hover {
+            transform: translateY(-2px);
+            opacity: 1;
+            text-shadow: 0 0 10px rgba(224, 206, 158, 0.22);
+        }
+
+        .slider-tab.active {
+            opacity: 1;
+            text-shadow: 0 0 12px rgba(224, 206, 158, 0.22);
+        }
+
+        .slider-shell {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 92%;
+            display: block;
+            z-index: 2;
+        }
+
+        .slider-window {
+            overflow: hidden;
+            width: 100%;
+            transition: height 0.35s ease;
+        }
+
+        .slider-track {
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            height: auto;
+        }
+
+        .slide-inner {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: center;
+            background: transparent;
+            border: none;
+            padding: 20px 20px;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+
+        .about-box {
+            max-width: 760px;
+            margin: 34px auto 0;
+            color: #f1e7ca;
+            font-size: 15px;
+            line-height: 2;
+            letter-spacing: 0.7px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+        }
+
+        .about-box p {
+            margin-bottom: 22px;
+        }
+
+        .contact-box {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+            margin-top: 34px;
+        }
+
+        .contact-box .social-buttons {
+            margin-top: 10px;
+        }
+
+
+        /* --- SOCIAL MEDIA (Przezroczyste na dole) --- */
+        .social-reveal-section {
+            position: relative;
+            z-index: 2;
+            padding: 120px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+        }
+
+        .social-title {
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            color: white;
+            width: 100%;           /* Zajmij całą szerokość kontenera */
+            text-align: center;    /* Wyśrodkuj tekst wewnątrz */
+            display: block;
+            margin-bottom: 50px;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .social-btn {
+            padding: 16px 32px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            color: white;
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .social-btn i {
+            font-size: 18px;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            filter: brightness(1.1);
+        }
+
+        .fb { background-color: #1877F2; }
+        .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .sh { background-color: #FFFC00; color: #000 !important;}
+        .bk { background-color: #05A862;}
+        
+        
+        .footer-info {
+            margin-top: 80px;
+            font-size: 18px;
+            letter-spacing:1.5px;
+            line-height: 2.2;
+        }
+        
+        .footer-strip {
+        position: relative;
+        z-index: 10;
+        background-color: #0b0b0b; 
+        border-top: 1px solid rgba(224, 206, 158, 0.3);
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Aby gwiazdy nie wystawały */
+        box-shadow: 0 -20px 40px rgba(0,0,0,0.9); 
+        border-top: 1px solid rgba(224, 206, 158, 0.3);
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .footer-text {
+        font-family: 'Cinzel', serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: rgba(224, 206, 158, 0.6);
+        z-index: 2;
+    }
+        
+        @media (max-width: 1100px) {
+            .slider-tabs {
+                width: 92%;
+                gap: 42px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .slider-tabs {
+                width: 94%;
+                gap: 14px;
+                margin: -34px auto 42px;
+            }
+
+            .about-box {
+                font-size: 14px;
+                line-height: 1.8;
+            }
+        }
+
+        @media (max-width: 480px) {
+        #side-menu {
+        width: 65%; /* Menu zajmie 65% szerokości ekranu na telefonie */
+    }
+
+    .slider-tabs {
+        width: 95%;
+        gap: 10px;
+        margin: -26px auto 34px;
+    }
+
+    .slider-tab {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+    
+}
+    </style>
+</head>
+<body>
+    
+    <div class="menu-icon" onclick="toggleMenu()">
+        <img src="https://images.icon-icons.com/3871/PNG/512/menu_icon_244496.png" alt="Menu">
+    </div>
+
+    <nav id="side-menu">
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="toggleMenu()">Start</a></li>
+            <li><a href="#cennik" onclick="toggleMenu()">Cennik</a></li>
+            <li><a href="#kontakt" onclick="toggleMenu()">Kontakt</a></li>
+            <li><a href="https://bornself.pl/" target="_blank">Kalkulator Numerologiczny</a></li>
+            <li><a href="https://ehoroskop.pl/ascendant" target="_blank">Kalkulator Ascendentu</a></li>
+            <li><a href="https://onlygames.io/gry/kulki/bubble-witch-saga-magical-shooter.html" target="_blank">Zagraj w Bubble Witch Saga</a></li>
+           <li class="bk-wrapper">
+            <a href="https://buycoffee.to/petter_tarot" target="_blank" class="nav-bk">
+                <i class="fas fa-coffee"></i> POSTAW KAWĘ
+            </a>
+        </li>
+        
+        </ul>
+    </nav>
+    <div class="menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
+
+    <div class="bg-fixed-layer"></div>
+
+    <header class="presentation">
+        <img src="https://raw.githubusercontent.com/hruston/WatchSmart/refs/heads/main/b5aef392-b7e7-4b25-82af-9132484e733b.jpg" alt="Piotr" class="profile-img">
+        <div class="profile-name">Piotr Kowalski</div>
+        <div class="profile-bio">Wróżbita & Medium</div>
+        <div class="profile-bio">Łączę światy, odczytując szeptane przekazy.</div>
+    </header>
+
+    <div class="cennik-wrapper" id="cennik">
+        <div class="stars-overlay"></div>
+
+
+        <div class="slider-tabs">
+            <button class="slider-tab left" onclick="goToSlide(0)">
+                <span>O mnie</span>
+            </button>
+
+            <button class="slider-tab center active" onclick="goToSlide(1)">
+                <span>Cennik</span>
+            </button>
+
+            <button class="slider-tab right" onclick="goToKontakt()">
+                <span>Kontakt</span>
+            </button>
+        </div>
+
+        <div class="slider-shell">
+            <div class="slider-window">
+                <div class="slider-track" id="sliderTrack">
+
+                    <section class="slide">
+                        <div class="slide-inner">
+                            <h1 class="reveal">POZNAJ MNIE</h1>
+                            <div class="main-title reveal">- O MNIE -</div>
+                            <div class="gold-accent"></div>
+
+                            <div class="about-box reveal">
+                                <p>
+                                    Nie każdy jest gotowy, by poznać prawdę.
+                                    Dlatego nie pracuję z każdym.
+                                </p>
+
+                                <p>
+                                    Jestem numerologiczną Dziewiątką - starą duszą,
+                                    która porusza się między wymiarami z ciszą i pewnością kogoś, kto widział więcej, niż powinien.
+                                    Waga daje mi precyzję i wyczucie równowagi, Lew w ascendencie siłę obecności i naturalny autorytet,
+                                    a Strzelec prowadzi mnie nieustannie ku temu, co prawdziwe, nawet jeśli jest niewygodne.
+                                </p>
+
+                                <p>
+                                    Tarot nie jest dla mnie systemem symboli.
+                                    Jest polem energii i przekazu. Nie interpretuję kart, ja rezonuję z tym, co przez nie przechodzi.
+                                    Czuję napięcia, obecności i informacje z drugiej strony.
+                                    To co dla innych jest intuicją, dla mnie jest klarownym sygnałem.
+                                </p>
+                                
+                                <p>
+                                    Jestem medium, przewodnikiem między światami.
+                                    Moje paranormalne i spirytualne zdolności nie służą widowisku ani rozrywce.
+                                    To narzędzia precyzyjnej, głębokiej pracy z energią, która realnie wpływa na decyzje, relacje i kierunek życia.
+                                    Każda sesja jest spotkaniem z tym, co gotowe się ujawnić - nic wcześniej, nic na siłę.
+                                </p>
+                                
+                                <p>
+                                   Nie obiecuję odpowiedzi, których chcesz. Pokazuję te, których potrzebujesz. 
+                                </p>
+                                
+                                <p>
+                                  Jeśli tu trafiłeś, energia już podjęła decyzję. Karty nie przewidują przyszłości, one ją odsłaniają. 
+                                </p>
+                                
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="slide">
+                        <div class="slide-inner">
+                            <div class="cennik-container">
+                                <h1 class="reveal">TAROT & DORADZTWO DUCHOWE</h1>
+                                <div class="main-title reveal">- CENNIK -</div>
+
+                                <h2 class="reveal">PYTANIA I KARTY</h2>
+                                <div class="item reveal"><div class="item-top"><span>1 PYTANIE DO KART</span><span class="dots"></span><span class="price">11 ZŁ</span></div><div class="desc">Jedno konkretne pytanie. Szybka, trafna odpowiedź i krótka wskazówka.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>1 SZCZEGÓŁOWE PYTANIE</span><span class="dots"></span><span class="price">13 ZŁ</span></div><div class="desc">Rozbudowana odpowiedź na jedno ważne pytanie z większym wglądem w sytuację.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>5 PYTAŃ DO KART</span><span class="dots"></span><span class="price">50 ZŁ</span></div><div class="desc">Pakiet pięciu pytań, który pozwala spojrzeć szerzej na Twoją sytuację.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>KARTA RADY</span><span class="dots"></span><span class="price">5 ZŁ</span></div><div class="desc">Krótki przekaz i wskazówka na teraz, kiedy potrzebujesz szybkiego kierunku.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>1 PYTANIE DO ZMARŁEGO</span><span class="dots"></span><span class="price">35 ZŁ</span></div><div class="desc">Próba odczytania przekazu od bliskiej osoby, która odeszła.</div></div>
+
+                                <h2 class="reveal">ANALIZA ENERGII</h2>
+                                <div class="item reveal"><div class="item-top"><span>ANALIZA CZAKR</span><span class="dots"></span><span class="price">30 ZŁ</span></div><div class="desc">Szybki podgląd przepływu energii i tego, gdzie mogą być blokady.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>PEŁNA ANALIZA CZAKR</span><span class="dots"></span><span class="price">45 ZŁ</span></div><div class="desc">Dokładniejsze spojrzenie na wszystkie centra energetyczne i ich równowagę.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>SZYBKA KONTROLA WITALNOŚCI</span><span class="dots"></span><span class="price">40 ZŁ</span></div><div class="desc">Dla momentów, gdy czujesz spadek sił i chcesz sprawdzić, skąd to się bierze.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>DIALOG Z CIAŁEM</span><span class="dots"></span><span class="price">70 ZŁ</span></div><div class="desc">Głębszy odczyt tego, co ciało próbuje Ci zakomunikować przez napięcia i odczucia.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>KLUCZ REINKARNACJI</span><span class="dots"></span><span class="price">60 ZŁ</span></div><div class="desc">Wgląd w lekcje duszy, powtarzające się wzorce i ślady z poprzednich wcieleń.</div></div>
+
+                                <h2 class="reveal">CZAS I PROGNOZY</h2>
+                                <div class="item reveal"><div class="item-top"><span>4 ASPEKTY TYGODNIA</span><span class="dots"></span><span class="price">50 ZŁ</span></div><div class="desc">Prognoza tygodnia w czterech ważnych obszarach życia.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>MIESIĘCZNY FOCUS</span><span class="dots"></span><span class="price">60 ZŁ</span></div><div class="desc">Szybki kompas na nadchodzący miesiąc i obszary, na których warto się skupić.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>ROCZNY ROZKŁAD ENERGII</span><span class="dots"></span><span class="price">100 ZŁ</span></div><div class="desc">Szerszy obraz roku i najważniejszych tematów, które będą Ci towarzyszyć.</div></div>
+
+                                <h2 class="reveal">RELACJE</h2>
+                                <div class="item reveal"><div class="item-top"><span>PARTNERSKIE ZWIERCIADŁO</span><span class="dots"></span><span class="price">70 ZŁ</span></div><div class="desc">Spojrzenie na relację, emocje i dynamikę między dwiema osobami.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>WĘZEŁ GORDYJSKI / PARTNERSKI</span><span class="dots"></span><span class="price">50 ZŁ</span></div><div class="desc">Pomoc w zrozumieniu trudnej relacji, konfliktu albo blokady między partnerami.</div></div>
+
+                                <h2 class="reveal">FINANSE</h2>
+                                <div class="item reveal"><div class="item-top"><span>FINANSOWY STRUMIEŃ</span><span class="dots"></span><span class="price">60 ZŁ</span></div><div class="desc">Odczyt energii pieniędzy, zarabiania i możliwych blokad finansowych.</div></div>
+                                <div class="item reveal"><div class="item-top"><span>ZYSK CZY STRATA?</span><span class="dots"></span><span class="price">55 ZŁ</span></div><div class="desc">Krótki wgląd w to, czy dana decyzja finansowa ma potencjał zysku czy ryzyka.</div></div>
+
+                                <div class="footer-info reveal">
+                                    KONTO BANKOWE:<br>
+                                    61 1240 3187 1111 0011 1601 5894
+                                </div>
+                                <div class="gold-accent"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="slide">
+                        <div class="slide-inner">
+                            <h1 class="reveal">POZOSTAŃMY W KONTAKCIE</h1>
+                            <div class="main-title reveal">- KONTAKT -</div>
+                            <div class="gold-accent"></div>
+
+                            <div class="about-box reveal">
+                                <p>
+                                    Napisz do mnie przez social media lub postaw kawę, jeśli chcesz
+                                    wesprzeć moją pracę. Odpowiadam tak szybko, jak to możliwe.
+                                </p>
+                            </div>
+
+                            <div class="contact-box reveal">
+                                <div class="social-buttons">
+                                    <a href="https://www.facebook.com/share/g/1CNKUNN35h/?mibextid=wwXIfr" target="_blank" class="social-btn fb">
+                                        <i class="fa-brands fa-facebook-f"></i> FACEBOOK
+                                    </a>
+                                    <a href="https://www.instagram.com/petter_tarot" target="_blank" class="social-btn ig">
+                                        <i class="fa-brands fa-instagram"></i> INSTAGRAM
+                                    </a>
+                                    <a href="https://buycoffee.to/petter_tarot" target="_blank" class="social-btn bk">
+                                        <i class="fas fa-coffee"></i> POSTAW KAWĘ
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-reveal-section" id="kontakt">
+        <div class="social-title reveal">ZNAJDŹ MNIE W SIECI</div>
+        <div class="social-buttons reveal">
+            <a href="https://www.facebook.com/share/g/1CNKUNN35h/?mibextid=wwXIfr" target="_blank" class="social-btn fb">
+                <i class="fa-brands fa-facebook-f"></i> FACEBOOK
+            </a>
+            <a href="https://www.instagram.com/petter_tarot" target="_blank" class="social-btn ig">
+                <i class="fa-brands fa-instagram"></i> INSTAGRAM
+            </a>
+            <a href="https://snapchat.com/add/Petter_me" target="_blank" class="social-btn sh">
+                <i class="fa-brands fa-snapchat"></i> SNAPCHAT
+            </a>
+            <a href="https://buycoffee.to/petter_tarot" target="_blank" class="social-btn bk">
+            <i class="fas fa-coffee"></i> POSTAW KAWĘ
+            </a>
+        </div>
+    </div>
+    
+    <footer class="footer-strip">
+    <div class="stars-overlay"></div>
+    <div class="footer-text">© 2026 PIOTR KOWALSKI • WSZELKIE PRAWA ZASTRZEŻONE</div>
+    </footer>
+    <script>
+        function getVisibleRevealGroups() {
+            const groups = [];
+            const activeSlide = document.querySelectorAll('.slide')[currentSlide];
+            const socialSection = document.querySelector('.social-reveal-section');
+
+            if (activeSlide) groups.push(activeSlide);
+            if (socialSection) groups.push(socialSection);
+
+            return groups;
+        }
+
+        function setRevealDelays(scope) {
+            if (!scope) return;
+
+            const blocks = scope.querySelectorAll('h1.reveal, .main-title.reveal, h2.reveal, .about-box.reveal, .contact-box.reveal, .footer-info.reveal, .social-title.reveal, .social-buttons.reveal');
+            blocks.forEach((el, index) => {
+                el.style.setProperty('--reveal-delay', `${index * 90}ms`);
+            });
+
+            const items = scope.querySelectorAll('.item.reveal');
+            items.forEach((el, index) => {
+                el.style.setProperty('--reveal-delay', `${120 + (index * 65)}ms`);
+            });
+        }
+
+        function reveal() {
+            const windowHeight = window.innerHeight;
+            const groups = getVisibleRevealGroups();
+
+            groups.forEach((group) => {
+                setRevealDelays(group);
+
+                const reveals = group.querySelectorAll('.reveal');
+                reveals.forEach((el) => {
+                    const elementTop = el.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - 70) {
+                        el.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        function resetReveals(scope) {
+            if (!scope) return;
+            scope.querySelectorAll('.reveal').forEach((el) => el.classList.remove('active'));
+        }
+
+        function toggleMenu() {
+            document.getElementById("side-menu").classList.toggle("active");
+            document.getElementById("menu-overlay").classList.toggle("active");
+        }
+
+        window.addEventListener('scroll', reveal, { passive: true });
+        window.addEventListener('load', reveal);
+
+        window.addEventListener('scroll', function() {
+            const presentation = document.querySelector('.presentation');
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let fadeStart = 50;
+            let fadeEnd = 600;
+
+            let opacity = 1 - (scrollTop - fadeStart) / (fadeEnd - fadeStart);
+
+            if (opacity > 1) opacity = 1;
+            if (opacity < 0) opacity = 0;
+
+            presentation.style.opacity = opacity;
+        });
+
+        let currentSlide = 1;
+        const track = document.getElementById('sliderTrack');
+        const tabs = document.querySelectorAll('.slider-tab');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function updateHeight() {
+            const activeSlide = document.querySelectorAll('.slide')[currentSlide];
+            const sliderWindow = document.querySelector('.slider-window');
+
+            if (activeSlide && sliderWindow) {
+                sliderWindow.style.height = activeSlide.offsetHeight + 'px';
+            }
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            tabs.forEach((tab, index) => {
+                if (index < 2) {
+                    tab.classList.toggle('active', index === currentSlide);
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                if (index !== currentSlide) {
+                    resetReveals(slide);
+                }
+            });
+
+            updateHeight();
+            requestAnimationFrame(() => {
+                requestAnimationFrame(reveal);
+            });
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        function goToKontakt() {
+            tabs.forEach((tab) => tab.classList.remove('active'));
+            const kontakt = document.getElementById('kontakt');
+            if (kontakt) {
+                kontakt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        window.addEventListener("load", () => {
+            updateSlider();
+            updateHeight();
+        });
+
+        window.addEventListener("resize", updateHeight);
+    </script>
+
+</body>
+</html>
