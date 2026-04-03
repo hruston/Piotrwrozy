@@ -242,6 +242,14 @@ h1 {
     margin: 20px 0;  
 }
 
+@media (max-width: 480px) {
+    .main-title {
+        white-space: nowrap;
+        font-size: 24px;
+        letter-spacing: 4px;
+    }
+}
+
 h2 {
     font-family: 'Cinzel', serif;
     font-size: 15px;
