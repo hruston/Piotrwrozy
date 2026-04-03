@@ -1,0 +1,466 @@
+
+html {
+    scroll-behavior: smooth;
+}
+/* FIX DLA IOS: Tło w osobnym kontenerze */
+.bg-fixed-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                      url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Ikonka menu */
+.menu-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.menu-icon img {
+    width: 100%;
+    filter: invert(85%) sepia(20%) saturate(500%) hue-rotate(10deg);
+}
+
+.menu-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 8px rgba(224, 206, 158, 0.8));
+}
+
+/* Wysuwany panel boczny */
+#side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 250px;
+    height: 100%;
+    background: rgba(11, 11, 11, 0.98);
+    backdrop-filter: blur(15px);
+    z-index: 1001;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-top: 80px;
+    border-right: 1px solid rgba(224, 206, 158, 0.2);
+}
+
+#side-menu.active {
+    left: 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 35px;
+    color: #e0ce9e;
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    padding: 10px 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #e0ce9e;
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #e0ce9e;
+}
+
+/* Przyciemnienie tła */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    display: none;
+}
+
+.menu-overlay.active {
+    display: block;
+}
+
+.nav-bk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #05A862;
+    color: #000 !important;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 4px 15px rgba(0, 255, 164, 0.3);
+}
+
+.nav-bk:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 255, 164, 0.5);
+    filter: brightness(1.1);
+}
+
+#side-menu .nav-links li.bk-wrapper {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #e0ce9e;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* PRESENTATION */
+.presentation {
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: transparent;
+    transition: opacity 0.2s ease-out;
+    will-change: opacity;
+}
+
+.profile-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #e0ce9e;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    object-position: center 35%;
+}
+
+.profile-name {
+    color: white;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    letter-spacing: 4px;
+    font-size: clamp(22px, 5vw, 28px);
+}
+
+.profile-bio {
+    color: white;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+    font-size: clamp(18px, 4vw, 14px);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    max-width: 600px;
+    padding: 5px 20px;
+    line-height: 1.6;
+}
+
+/* CENNIK */
+.cennik-wrapper {
+    position: relative;
+    z-index: 10;
+    background-color: #0b0b0b;
+    box-shadow: 0 -30px 60px rgba(0,0,0,0.9),
+                0 30px 60px rgba(0,0,0,0.9);
+    border-top: 1px solid rgba(224, 206, 158, 0.3);
+    border-bottom: 1px solid rgba(224, 206, 158, 0.3);
+    padding: 100px 0;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 5px;
+    font-size: 22px;
+    margin-bottom: 40px;
+}
+
+.main-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(30px, 8vw, 40px);
+    letter-spacing: 10px;
+    margin: 20px 0;
+}
+
+h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    letter-spacing: 4px;
+    margin: 60px 0 25px;
+    opacity: 0.9;
+    color: #fff;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 8px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.item span:not(.dots) {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.item:hover span:not(.dots) {
+    color: #e0ce9e;
+    text-shadow: 0 0 10px rgba(224, 206, 158, 0.9);
+}
+
+.item span:not(.dots):hover {
+    transform: translateY(-2px);
+}
+
+.dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted rgba(224, 206, 158, 0.3);
+    margin: 0 12px 5px;
+}
+
+.price {
+    font-weight: bold;
+    color: #fff;
+}
+
+.stars-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        url('https://www.transparenttextures.com/patterns/stardust.png'),
+        radial-gradient(circle at top right, rgba(224, 206, 158, 0.1), transparent 400px),
+        radial-gradient(circle at bottom left, rgba(224, 206, 158, 0.07), transparent 400px);
+}
+
+.cennik-container {
+    max-width: 650px;
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+}
+
+.gold-accent {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e0ce9e, transparent);
+    margin: 20px auto 0;
+}
+
+/* SOCIAL */
+.social-reveal-section {
+    position: relative;
+    z-index: 2;
+    padding: 120px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.social-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    color: white;
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin-bottom: 50px;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.social-buttons {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.social-btn {
+    padding: 16px 32px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    color: white;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.social-btn i {
+    font-size: 18px;
+}
+
+.social-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    filter: brightness(1.1);
+}
+
+.fb {
+    background-color: #1877F2;
+}
+
+.ig {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.sh {
+    background-color: #FFFC00;
+    color: #000 !important;
+}
+
+.bk {
+    background-color: #05A862;
+}
+
+.footer-info {
+    margin-top: 80px;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    line-height: 2.2;
+}
+
+.footer-strip {
+    position: relative;
+    z-index: 100;
+    margin-top: auto;
+    flex-shrink: 0;
+    background-color: #0b0b0b;
+    border-top: 1px solid rgba(224, 206, 158, 0.3);
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 500px 0 500px #0b0b0b;
+    overflow: visible;
+}
+
+.footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: rgba(224, 206, 158, 0.6);
+    z-index: 2;
+}
+
+@media (max-width: 480px) {
+    #side-menu {
+        width: 65%;
+    }
+}
+
+/* podstrona O mnie */
+.about-box {
+            max-width: 760px;
+            margin: 34px auto 0;
+            color: #f1e7ca;
+            font-size: 15px;
+            line-height: 2;
+            letter-spacing: 0.7px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+        }
+
+        .about-box p {
+            margin-bottom: 22px;
+        }
+
+        .contact-box {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+            margin-top: 34px;
+        }
+        
+/* Podstrona rytuały */
+
+.rytual-title {
+    color: #c85a5a;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.rytual-title:hover {
+    color: #ff6b6b;
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+    transform: scale(1.03);
+}

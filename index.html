@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>Tarot & Doradztwo Duchowe - Cennik</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+        <img src="https://images.icon-icons.com/3871/PNG/512/menu_icon_244496.png" alt="Menu">
+    </div>
+
+    <nav id="side-menu">
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
+        <ul class="nav-links">
+            <li><a href="index.html" onclick="toggleMenu()">Start</a></li>
+            <li><a href="omnie.html#omnie" onclick="toggleMenu()">O mnie</a></li>
+            <li><a href="index.html#cennik" onclick="toggleMenu()">Cennik</a></li>
+            <li><a href="rytualy.html#rytualy" onclick="toggleMenu()">Rytuały</a></li>
+            <li><a href="index.html#kontakt" onclick="toggleMenu()">Kontakt</a></li>
+            <li><a href="https://bornself.pl/" target="_blank">Kalkulator Numerologiczny</a></li>
+            <li><a href="https://ehoroskop.pl/ascendant" target="_blank">Kalkulator Ascendentu</a></li>
+            <li><a href="https://onlygames.io/gry/kulki/bubble-witch-saga-magical-shooter.html" target="_blank">Zagraj w Bubble Witch Saga</a></li>
+            <li class="bk-wrapper">
+                <a href="https://buycoffee.to/petter_tarot" target="_blank" class="nav-bk">
+                    <i class="fas fa-coffee"></i> POSTAW KAWĘ
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
+
+    <div class="bg-fixed-layer"></div>
+
+    <header class="presentation">
+        <img src="https://raw.githubusercontent.com/hruston/WatchSmart/refs/heads/main/b5aef392-b7e7-4b25-82af-9132484e733b.jpg" alt="Piotr" class="profile-img">
+        <div class="profile-name">Piotr Kowalski</div>
+        <div class="profile-bio">Wróżbita & Medium</div>
+        <div class="profile-bio">Łączę światy, odczytując szeptane przekazy.</div>
+    </header>
+
+    <div class="cennik-wrapper" id="cennik">
+        <div class="stars-overlay"></div>
+        <div class="cennik-container">
+            <h1 class="reveal">TAROT & DORADZTWO DUCHOWE</h1>
+            <div class="main-title reveal">- CENNIK -</div>
+
+            <h2 class="reveal">PYTANIA I KARTY</h2>
+            <div class="item reveal"><span>1 PYTANIE DO KART</span><span class="dots"></span><span class="price">11 ZŁ</span></div>
+            <div class="item reveal"><span>1 SZCZEGÓŁOWE PYTANIE</span><span class="dots"></span><span class="price">13 ZŁ</span></div>
+            <div class="item reveal"><span>5 PYTAŃ DO KART</span><span class="dots"></span><span class="price">50 ZŁ</span></div>
+            <div class="item reveal"><span>KARTA RADY</span><span class="dots"></span><span class="price">5 ZŁ</span></div>
+            <div class="item reveal"><span>1 PYTANIE DO ZMARŁEGO</span><span class="dots"></span><span class="price">35 ZŁ</span></div>
+
+            <h2 class="reveal">ANALIZA ENERGII</h2>
+            <div class="item reveal"><span>ANALIZA CZAKR</span><span class="dots"></span><span class="price">30 ZŁ</span></div>
+            <div class="item reveal"><span>PEŁNA ANALIZA CZAKR</span><span class="dots"></span><span class="price">45 ZŁ</span></div>
+            <div class="item reveal"><span>SZYBKA KONTROLA WITALNOŚCI</span><span class="dots"></span><span class="price">40 ZŁ</span></div>
+            <div class="item reveal"><span>DIALOG Z CIAŁEM</span><span class="dots"></span><span class="price">70 ZŁ</span></div>
+            <div class="item reveal"><span>KLUCZ REINKARNACJI</span><span class="dots"></span><span class="price">60 ZŁ</span></div>
+
+            <h2 class="reveal">CZAS I PROGNOZY</h2>
+            <div class="item reveal"><span>4 ASPEKTY TYGODNIA</span><span class="dots"></span><span class="price">50 ZŁ</span></div>
+            <div class="item reveal"><span>MIESIĘCZNY FOCUS</span><span class="dots"></span><span class="price">60 ZŁ</span></div>
+            <div class="item reveal"><span>ROCZNY ROZKŁAD ENERGII</span><span class="dots"></span><span class="price">100 ZŁ</span></div>
+
+            <h2 class="reveal">RELACJE</h2>
+            <div class="item reveal"><span>PARTNERSKIE ZWIERCIADŁO</span><span class="dots"></span><span class="price">70 ZŁ</span></div>
+            <div class="item reveal"><span>WĘZEŁ GORDYJSKI / PARTNERSKI</span><span class="dots"></span><span class="price">50 ZŁ</span></div>
+
+            <h2 class="reveal">FINANSE</h2>
+            <div class="item reveal"><span>FINANSOWY STRUMIEŃ</span><span class="dots"></span><span class="price">60 ZŁ</span></div>
+            <div class="item reveal"><span>ZYSK CZY STRATA?</span><span class="dots"></span><span class="price">55 ZŁ</span></div>
+
+            <div class="gold-line reveal"></div>
+            <div class="footer-info reveal">
+                KONTO BANKOWE:<br>
+                61 1240 3187 1111 0011 1601 5894
+            </div>
+            <div class="gold-accent"></div>
+        </div>
+    </div>
+
+    <div class="social-reveal-section" id="kontakt">
+        <div class="social-title reveal">ZNAJDŹ MNIE W SIECI</div>
+        <div class="social-buttons reveal">
+            <a href="https://www.facebook.com/share/g/1CNKUNN35h/?mibextid=wwXIfr" target="_blank" class="social-btn fb">
+                <i class="fa-brands fa-facebook-f"></i> FACEBOOK
+            </a>
+            <a href="https://www.instagram.com/petter_tarot" target="_blank" class="social-btn ig">
+                <i class="fa-brands fa-instagram"></i> INSTAGRAM
+            </a>
+            <a href="http://snapchat.com/add/Petter_me" target="_blank" class="social-btn sh">
+                <i class="fa-brands fa-snapchat"></i> SNAPCHAT
+            </a>
+            <a href="https://buycoffee.to/petter_tarot" target="_blank" class="social-btn bk">
+                <i class="fas fa-coffee"></i> POSTAW KAWĘ
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer-strip">
+        <div class="stars-overlay"></div>
+        <div class="footer-text">© 2026 PIOTR KOWALSKI</div>
+    </footer>
+
+    <script src="java.js" defer></script>
+</body>
+</html>
