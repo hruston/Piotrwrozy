@@ -244,9 +244,20 @@ h1 {
 
 @media (max-width: 480px) {
     .main-title {
+        font-size: 18px !important;
+        letter-spacing: 2px !important;
         white-space: nowrap;
-        font-size: 24px;       /* zmniejszamy tylko na telefonie */
-        letter-spacing: 4px;   /* mniejsze odstępy */
+        text-align: center;
+        width: 100%;
+        display: block;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 390px) {
+    .main-title {
+        font-size: 16px !important;
+        letter-spacing: 1px !important;
     }
 }
 
