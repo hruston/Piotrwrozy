@@ -245,8 +245,8 @@ h1 {
 @media (max-width: 480px) {
     .main-title {
         white-space: nowrap;
-        font-size: 24px;
-        letter-spacing: 4px;
+        font-size: 24px;       /* zmniejszamy tylko na telefonie */
+        letter-spacing: 4px;   /* mniejsze odstępy */
     }
 }
 
