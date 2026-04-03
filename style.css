@@ -237,9 +237,9 @@ h1 {
 
 .main-title {
     font-family: 'Cinzel', serif;
-    font-size: clamp(20px, 8vw, 30px);
+    font-size: clamp(30px, 8vw, 40px);
     letter-spacing: 10px;
-    margin: 20px 0;
+    margin: 20px 0;  
 }
 
 h2 {
