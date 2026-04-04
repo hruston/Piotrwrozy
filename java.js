@@ -42,4 +42,17 @@ window.addEventListener("scroll", function () {
     if (opacity < 0) opacity = 0;
 
     presentation.style.opacity = opacity;
-});
+}
+
+function toggleRytual(element) {
+    const box = element.parentElement;
+    box.classList.toggle("active");
+
+    const toggleText = element.querySelector(".rytual-toggle");
+
+    if (box.classList.contains("active")) {
+        toggleText.innerText = "— Zwiń opis —";
+    } else {
+        toggleText.innerText = "— Rozwiń opis —";
+    }
+}
