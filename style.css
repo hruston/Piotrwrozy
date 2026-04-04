@@ -515,7 +515,7 @@ h2 {
 }
 
 .rytual-box.active .rytual-content {
-    max-height: 500px; /* możesz zwiększyć jeśli opis dłuższy */
+    max-height: 2000px;
 }
 
 .rytual-header {
