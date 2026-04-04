@@ -478,10 +478,63 @@ h2 {
 .rytual-title {
     color: #c85a5a;
     transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin: 0;
+
 }
 
 .rytual-title:hover {
     color: #ff6b6b;
     text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
     transform: scale(1.03);
+}
+
+.rytual-box {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.rytual-toggle {
+    font-size: 12px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.rytual-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+    text-align: center;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+.rytual-box.active .rytual-content {
+    max-height: 500px; /* możesz zwiększyć jeśli opis dłuższy */
+}
+
+.rytual-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.rytual-icon {
+    width: 60px;
+    height: auto;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.cennik-wrapper .social-btn.bk {
+    display: flex; /* zamiast inline-flex */
+    width: fit-content;
+    min-width: unset;
+    padding: 14px 28px;
+    margin: 20px auto;
+    justify-content: center;
 }
