@@ -273,7 +273,6 @@ h2 {
 }
 
 .item {
-    text-align: left;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
