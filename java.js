@@ -42,7 +42,7 @@ window.addEventListener("scroll", function () {
     if (opacity < 0) opacity = 0;
 
     presentation.style.opacity = opacity;
-}
+});
 
 
 function toggleRytual(element) {
