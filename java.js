@@ -42,18 +42,21 @@ window.addEventListener("scroll", function () {
     if (opacity < 0) opacity = 0;
 
     presentation.style.opacity = opacity;
-});
+}
 
 
 function toggleRytual(element) {
     const box = element.parentElement;
-    box.classList.toggle("active");
-
+    const content = box.querySelector(".rytual-content");
     const toggleText = element.querySelector(".rytual-toggle");
 
     if (box.classList.contains("active")) {
-        toggleText.innerText = "— Zwiń opis —";
-    } else {
+        content.style.maxHeight = null;
+        box.classList.remove("active");
         toggleText.innerText = "— Rozwiń opis —";
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        box.classList.add("active");
+        toggleText.innerText = "— Zwiń opis —";
     }
 }
