@@ -47,16 +47,13 @@ window.addEventListener("scroll", function () {
 
 function toggleRytual(element) {
     const box = element.parentElement;
-    const content = box.querySelector(".rytual-content");
+    box.classList.toggle("active");
+
     const toggleText = element.querySelector(".rytual-toggle");
 
     if (box.classList.contains("active")) {
-        content.style.maxHeight = null;
-        box.classList.remove("active");
-        toggleText.innerText = "— Rozwiń opis —";
-    } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-        box.classList.add("active");
         toggleText.innerText = "— Zwiń opis —";
+    } else {
+        toggleText.innerText = "— Rozwiń opis —";
     }
 }
