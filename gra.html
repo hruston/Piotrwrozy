@@ -4,72 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <title>Tarot & Doradztwo Duchowe - Gra</title>
+    <title>Tarot & Doradztwo Duchowe - O MNIE</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        /* Stylistyka dopasowana do Twojego motywu */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #1a1a1a;
-            color: white;
-            font-family: 'Montserrat', sans-serif; /* Spójność z resztą strony */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .game-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 0;
-        }
-
-        .game-wrapper {
-            width: 95%;
-            max-width: 900px;
-            aspect-ratio: 16 / 9; 
-            border: 2px solid #c5a059; /* Złoty akcent pasujący do Tarota */
-            border-radius: 15px;
-            overflow: hidden;
-            background: #000;
-            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3); /* Magiczna poświata */
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            color: #c5a059;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        /* Poprawka dla menu, jeśli style.css go nie pozycjonuje */
-        .menu-icon {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            cursor: pointer;
-            width: 40px;
-        }
-        
-        .menu-icon img {
-            width: 100%;
-            filter: invert(1); /* Ikona na biało, jeśli jest czarna */
-        }
-    </style>
+    <script src="java.js" defer></script>
 </head>
 <body>
 
@@ -84,9 +24,10 @@
             <li><a href="omnie.html#omnie" onclick="toggleMenu()">O mnie</a></li>
             <li><a href="index.html#cennik" onclick="toggleMenu()">Cennik</a></li>
             <li><a href="rytualy.html#rytualy" onclick="toggleMenu()">Rytuały</a></li>
-            <li><a href="index.html#kontakt" onclick="toggleMenu()">Kontakt</a></li>
+            <li><a href="omnie.html#kontakt" onclick="toggleMenu()">Kontakt</a></li>
             <li><a href="https://bornself.pl/" target="_blank">Kalkulator Numerologiczny</a></li>
             <li><a href="https://ehoroskop.pl/ascendant" target="_blank">Kalkulator Ascendentu</a></li>
+            <li><a href="gra.html" target="_blank">Chwila dla siebie</a></li>
             <li class="bk-wrapper">
                 <a href="https://buycoffee.to/petter_tarot" target="_blank" class="nav-bk">
                     <i class="fas fa-coffee"></i> POSTAW KAWĘ
@@ -106,7 +47,11 @@
         <div class="profile-bio">Łączę światy, odczytując szeptane przekazy.</div>
     </header>
 
-    <section class="game-section">
+    <div class="cennik-wrapper" id="omnie">
+        <div class="stars-overlay"></div>
+        <div class="cennik-container">
+
+             <section class="game-section">
         <h1>Magiczna Chwila Relaksu</h1>
 
         <div class="game-wrapper">
@@ -117,6 +62,10 @@
             </iframe>
         </div>
     </section>
+
+            <div class="gold-accent"></div>
+        </div>
+    </div>
 
     <div class="social-reveal-section" id="kontakt">
         <div class="social-title reveal">ZNAJDŹ MNIE W SIECI</div>
@@ -141,6 +90,13 @@
         <div class="footer-text">© 2026 PIOTR KOWALSKI</div>
     </footer>
 
-    <script src="java.js" defer></script>
 </body>
+
+<script>
+function goToCennik(event) {
+    event.preventDefault();
+    window.location.href = "index.html#cennik-wrapper";
+}
+</script>
+
 </html>
