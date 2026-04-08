@@ -57,3 +57,14 @@ function toggleRytual(element) {
         toggleText.innerText = "— Rozwiń opis —";
     }
 }
+
+function toggleOpis(element) {
+    const item = element.parentElement;
+    item.classList.toggle("open");
+
+    if (item.classList.contains("open")) {
+        element.innerText = "— Zwiń opis —";
+    } else {
+        element.innerText = "— Rozwiń opis —";
+    }
+}
