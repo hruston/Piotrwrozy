@@ -1,24 +1,118 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div style="width: 100%; height: 600px; text-align: center;">
-    <iframe 
-        src="https://html5.gamedistribution.com/468b5fe507a6489eadf0606a9f2cedc5/" 
-        width="100%" 
-        height="100%" 
-        frameborder="0" 
-        scrolling="no" 
-        allowfullscreen>
-    </iframe>
-</div>
-    </body>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>Tarot & Doradztwo Duchowe - Gra</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="java.js" defer></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .game-wrapper {
+            width: 90%;
+            max-width: 900px;
+            margin-top: 20px;
+            aspect-ratio: 16 / 9; /* Zachowuje proporcje gry */
+            border: 5px solid #444;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+        <img src="https://images.icon-icons.com/3871/PNG/512/menu_icon_244496.png" alt="Menu">
+    </div>
+
+    <nav id="side-menu">
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
+        <ul class="nav-links">
+            <li><a href="index.html" onclick="toggleMenu()">Start</a></li>
+            <li><a href="omnie.html#omnie" onclick="toggleMenu()">O mnie</a></li>
+            <li><a href="index.html#cennik" onclick="toggleMenu()">Cennik</a></li>
+            <li><a href="rytualy.html#rytualy" onclick="toggleMenu()">Rytuały</a></li>
+            <li><a href="index.html#kontakt" onclick="toggleMenu()">Kontakt</a></li>
+            <li><a href="https://bornself.pl/" target="_blank">Kalkulator Numerologiczny</a></li>
+            <li><a href="https://ehoroskop.pl/ascendant" target="_blank">Kalkulator Ascendentu</a></li>
+            <li><a href="https://onlygames.io/gry/kulki/bubble-witch-saga-magical-shooter.html" target="_blank">Zagraj w Bubble Witch Saga</a></li>
+            <li class="bk-wrapper">
+                <a href="https://buycoffee.to/petter_tarot" target="_blank" class="nav-bk">
+                    <i class="fas fa-coffee"></i> POSTAW KAWĘ
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
+
+    <div class="bg-fixed-layer"></div>
+
+    <header class="presentation">
+        <img src="https://raw.githubusercontent.com/hruston/WatchSmart/refs/heads/main/b5aef392-b7e7-4b25-82af-9132484e733b.jpg" alt="Piotr" class="profile-img">
+        <div class="profile-name">Piotr Kowalski</div>
+        <div class="profile-bio">Wróżbita & Medium</div>
+        <div class="profile-bio">Łączę światy, odczytując szeptane przekazy.</div>
+    </header>
+
+    <div class="cennik-wrapper" id="cennik">
+        <h1>Bubble Witch Saga - Zagraj teraz!</h1>
+
+    <div class="game-wrapper">
+        <iframe 
+            src="https://html5.gamedistribution.com/468b5fe507a6489eadf0606a9f2cedc5/" 
+            allowfullscreen="true" 
+            scrolling="no">
+        </iframe>
+    </div>
+    </div>
+
+    <div class="social-reveal-section" id="kontakt">
+        <div class="social-title reveal">ZNAJDŹ MNIE W SIECI</div>
+        <div class="social-buttons reveal">
+            <a href="https://www.facebook.com/share/g/1CNKUNN35h/?mibextid=wwXIfr" target="_blank" class="social-btn fb">
+                <i class="fa-brands fa-facebook-f"></i> FACEBOOK
+            </a>
+            <a href="https://www.instagram.com/petter_tarot" target="_blank" class="social-btn ig">
+                <i class="fa-brands fa-instagram"></i> INSTAGRAM
+            </a>
+            <a href="http://snapchat.com/add/Petter_me" target="_blank" class="social-btn sh">
+                <i class="fa-brands fa-snapchat"></i> SNAPCHAT
+            </a>
+            <a href="https://buycoffee.to/petter_tarot" target="_blank" class="social-btn bk">
+                <i class="fas fa-coffee"></i> POSTAW KAWĘ
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer-strip">
+        <div class="stars-overlay"></div>
+        <div class="footer-text">© 2026 PIOTR KOWALSKI</div>
+    </footer>
+
+    <script src="java.js" defer></script>
+</body>
 </html>
