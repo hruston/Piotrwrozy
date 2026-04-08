@@ -60,6 +60,19 @@ function toggleRytual(element) {
 
 function toggleOpis(element) {
     const item = element.parentElement;
+    const allItems = document.querySelectorAll(".item");
+
+    // zamknij wszystkie inne
+    allItems.forEach(el => {
+        if (el !== item) {
+            el.classList.remove("open");
+
+            const toggle = el.querySelector(".opis-toggle");
+            if (toggle) toggle.innerText = "— Rozwiń opis —";
+        }
+    });
+
+    // toggle klikniętego
     item.classList.toggle("open");
 
     if (item.classList.contains("open")) {
