@@ -152,7 +152,17 @@ body {
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
 }
+
+.page-content {
+    flex: 1;
+    position: relative;
+}
+
 
 /* PRESENTATION */
 .presentation {
