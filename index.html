@@ -27,7 +27,7 @@
             <li><a href="index.html#kontakt" onclick="toggleMenu()">Kontakt</a></li>
             <li><a href="https://bornself.pl/" target="_blank">Kalkulator Numerologiczny</a></li>
             <li><a href="https://ehoroskop.pl/ascendant" target="_blank">Kalkulator Ascendentu</a></li>
-            <li><a href="https://onlygames.io/gry/kulki/bubble-witch-saga-magical-shooter.html" target="_blank">Zagraj w Bubble Witch Saga</a></li>
+            <li><a href="gra.html" target="_blank">Chwila dla siebie</a></li>
             <li class="bk-wrapper">
                 <a href="https://buycoffee.to/petter_tarot" target="_blank" class="nav-bk">
                     <i class="fas fa-coffee"></i> POSTAW KAWĘ
@@ -54,33 +54,185 @@
             <div class="main-title reveal">- CENNIK -</div>
 
             <h2 class="reveal">PYTANIA I KARTY</h2>
-            <div class="item reveal"><span>1 PYTANIE DO KART</span><span class="dots"></span><span class="price">11 ZŁ</span></div>
-            <div class="item reveal"><span>1 PYTANIE PREMIUM</span><span class="dots"></span><span class="price">13 ZŁ</span></div>
-            <div class="item reveal"><span>5 PYTAŃ DO KART</span><span class="dots"></span><span class="price">50 ZŁ</span></div>
-            <div class="item reveal"><span>KARTA RADY</span><span class="dots"></span><span class="price">5 ZŁ</span></div>
-            <div class="item reveal"><span>1 PYTANIE DO ZMARŁEGO</span><span class="dots"></span><span class="price">35 ZŁ</span></div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">1 PYTANIE DO KART</span>
+                        <span class="dots"></span>
+                        <span class="price">11 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Jedno konkretne pytanie do kart tarota. precyzyjnie i jasno, by odkryć sedno sytuacji i otrzymać wskazówkę, której naprawdę potrzebujesz.</div>
+                </div>
+
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">1 PYTANIE PREMIUM</span>
+                        <span class="dots"></span>
+                        <span class="price">13 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Zadaj jedno konkretne pytanie do kart tarota i otrzymaj nieco więcej szczegółów niż w standardowej wersji. Ta opcja pozwala lepiej poczuć, czy wróżba naprawdę rezonuje z Tobą i Twoją sytuacją.</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">5 PYTAŃ DO KART</span>
+                        <span class="dots"></span>
+                        <span class="price">50 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Zadaj 5 pytań do kart i oszczędź 5 zł</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">KARTA RADY</span>
+                        <span class="dots"></span>
+                        <span class="price">5 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Jedna wskazówka od tarota, która pokazuje najlepszy kierunek działania.</div>
+                </div>
+                
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">1 PYTANIE DO ZMARŁEGO</span>
+                        <span class="dots"></span>
+                        <span class="price">35 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Ostatnia szansa, by porozmawiać z duszą bliskiej osoby i zadać jej pytania. Opcja dostępna tylko raz dla tej samej zmarłej osoby.</div>
+                </div>
 
             <h2 class="reveal">ANALIZA ENERGII</h2>
-            <div class="item reveal"><span>ANALIZA CZAKR</span><span class="dots"></span><span class="price">30 ZŁ</span></div>
-            <div class="item reveal"><span>ANALIZA CZAKR Z WSPARCIEM</span><span class="dots"></span><span class="price">45 ZŁ</span></div>
-            <div class="item reveal"><span>SZYBKA KONTROLA WITALNOŚCI</span><span class="dots"></span><span class="price">40 ZŁ</span></div>
-            <div class="item reveal"><span>DIALOG Z CIAŁEM</span><span class="dots"></span><span class="price">70 ZŁ</span></div>
-            <div class="item reveal"><span>KLUCZ REINKARNACJI</span><span class="dots"></span><span class="price">60 ZŁ</span></div>
+               
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">ANALIZA CZAKR</span>
+                        <span class="dots"></span>
+                        <span class="price">30 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Odkryj stan swoich energetycznych centrów i dowiedz się, które czakry potrzebują wsparcia.</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">ANALIZA CZAKR PREMIUM</span>
+                        <span class="dots"></span>
+                        <span class="price">45 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Odkryj stan wszystkich swoich czakr i otrzymaj praktyczne wskazówki, jak odblokować energię i przywrócić równowagę w ciele i umyśle.</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">SZYBKA KONTROLA WITALNOŚCI</span>
+                        <span class="dots"></span>
+                        <span class="price">40 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Idealny rozkład na szybkie sprawdzenie gdy czujesz spadek formy, ale nie wiesz dlaczego.</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">DIALOG Z CIAŁEM</span>
+                        <span class="dots"></span>
+                        <span class="price">70 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Ten rozkład jest stworzony po to, abyś mógł/mogła zrozumieć, co Twoje ciało próbuje Ci przekazać i jak możesz je najlepiej wesprzeć w tym momencie.</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">KLUCZ REINKARNACJI</span>
+                        <span class="dots"></span>
+                        <span class="price">60 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Poznaj swoje wcześniejsze życie i odkryj, jak doświadczenia z przeszłości wpływają na Twoją obecną drogę.</div>
+                </div>
 
             <h2 class="reveal">CZAS I PROGNOZY</h2>
-            <div class="item reveal"><span>4 ASPEKTY TYGODNIA</span><span class="dots"></span><span class="price">50 ZŁ</span></div>
-            <div class="item reveal"><span>MIESIĘCZNY FOCUS</span><span class="dots"></span><span class="price">60 ZŁ</span></div>
-            <div class="item reveal"><span>ROCZNY ROZKŁAD ENERGII</span><span class="dots"></span><span class="price">100 ZŁ</span></div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">4 ASPEKTY TYGODNIA</span>
+                        <span class="dots"></span>
+                        <span class="price">50 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Rozkład ten pozwala zobaczyć, jak będzie wyglądać nadchodzący tydzień w czterech kluczowych obszarach.</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">MIESIĘCZNY FOCUS</span>
+                        <span class="dots"></span>
+                        <span class="price">60 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">To jest szybki kompas, który pokaże, na czym musisz się skupić, aby dobrze przeżyć nadchodzący miesiąc.</div>
+                </div>
+                
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">ROCZNY ROZKŁAD ENERGII</span>
+                        <span class="dots"></span>
+                        <span class="price">100 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Ten rozkład jest przeznaczony do szybkiego zrozumienia, na czym należy się skupić w czterech kluczowych obszarach życia przez cały rok.</div>
+                </div>
 
             <h2 class="reveal">RELACJE</h2>
-            <div class="item reveal"><span>PARTNERSKIE ZWIERCIADŁO</span><span class="dots"></span><span class="price">70 ZŁ</span></div>
-            <div class="item reveal"><span>WĘZEŁ GORDYJSKI</span><span class="dots"></span><span class="price">50 ZŁ</span></div>
+                
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">PARTNERSKIE ZWIERCIADŁO</span>
+                        <span class="dots"></span>
+                        <span class="price">70 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Odkryj, co naprawdę myślisz, czujesz i robisz w relacji i zobacz, jak wygląda perspektywa Twojego partnera.</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">WĘZEŁ GORDYJSKI</span>
+                        <span class="dots"></span>
+                        <span class="price">50 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Jeśli potrzebujesz szybkiej odpowiedzi na konkretny problem w związku (np. kłótnia), użyj tego rozkładu.</div>
+                </div>
 
             <h2 class="reveal">FINANSE</h2>
-            <div class="item reveal"><span>FINANSOWY STRUMIEŃ</span><span class="dots"></span><span class="price">60 ZŁ</span></div>
-            <div class="item reveal"><span>ZYSK CZY STRATA?</span><span class="dots"></span><span class="price">55 ZŁ</span></div>
-
-            <div class="gold-line reveal"></div>
+                
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">FINANSOWY STRUMIEŃ</span>
+                        <span class="dots"></span>
+                        <span class="price">60 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Ten rozkład służy do oceny Twojej obecnej kondycji finansowej i znalezienia sposobów na jej poprawę. Pokazuje, gdzie pieniądze uciekają, a skąd mogą przyjść.</div>
+                </div>
+            
+                <div class="item reveal">
+                    <div class="item-top">
+                        <span class="item-name">ZYSK CZY STRATA?</span>
+                        <span class="dots"></span>
+                        <span class="price">55 ZŁ</span>
+                    </div>
+                    <div class="opis-toggle" onclick="toggleOpis(this)">— Rozwiń opis —</div>
+                    <div class="opis-content">Idealny, gdy zastanawiasz się nad konkretnym ruchem: "Czy wziąć ten kredyt?", "Czy zmienić pracę dla pieniędzy?", "Czy zainwestować w ten kurs?".</div>
+                </div>
+            
             <div class="footer-info reveal">
                 KONTO BANKOWE:<br>
                 61 1240 3187 1111 0011 1601 5894
@@ -112,6 +264,5 @@
         <div class="footer-text">© 2026 PIOTR KOWALSKI</div>
     </footer>
 
-    <script src="java.js" defer></script>
 </body>
 </html>
