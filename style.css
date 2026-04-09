@@ -159,6 +159,7 @@ body {
 
 .main-content {
     flex: 1 0 auto; /* To sprawia, że ta sekcja rozciąga się i zajmuje całą wolną przestrzeń */
+    padding-bottom: 40px;
 }
 
 /* PRESENTATION */
@@ -477,7 +478,8 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 500px 0 500px #0b0b0b;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+    width: 100%;
     overflow: visible;
 }
 
