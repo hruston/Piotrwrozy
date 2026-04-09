@@ -4,18 +4,7 @@ html {
 }
 /* FIX DLA IOS: Tło w osobnym kontenerze */
 .bg-fixed-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                      url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
+    display: none;
 }
 
 /* Ikonka menu */
@@ -156,6 +145,18 @@ body {
     flex-direction: column;
     min-height: 100vh; /* fallback dla starszych przeglądarek */
     min-height: 100dvh;
+     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                      url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .main-content {
