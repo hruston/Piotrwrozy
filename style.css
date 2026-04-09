@@ -157,6 +157,10 @@ body {
     min-height: 100vh;
 }
 
+.main-content {
+    flex: 1 0 auto; /* To sprawia, że ta sekcja rozciąga się i zajmuje całą wolną przestrzeń */
+}
+
 /* PRESENTATION */
 .presentation {
     height: 550px;
