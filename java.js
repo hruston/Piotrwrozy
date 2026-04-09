@@ -47,19 +47,14 @@ window.addEventListener("scroll", function () {
 
 function toggleRytual(element) {
     const box = element.parentElement;
-    const isOpen = box.classList.contains("open");
+    box.classList.toggle("active");
 
-    // zamknij wszystkie
-    document.querySelectorAll(".rytual-box").forEach(el => {
-        el.classList.remove("open");
-        const t = el.querySelector(".rytual-toggle");
-        if (t) t.innerText = "— Rozwiń opis —";
-    });
+    const toggleText = element.querySelector(".rytual-toggle");
 
-    // otwórz kliknięty, jeśli był zamknięty
-    if (!isOpen) {
-        box.classList.add("open");
-        element.querySelector(".rytual-toggle").innerText = "— Zwiń opis —";
+    if (box.classList.contains("active")) {
+        toggleText.innerText = "— Zwiń opis —";
+    } else {
+        toggleText.innerText = "— Rozwiń opis —";
     }
 }
 
