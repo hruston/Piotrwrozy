@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opinie</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      background:
+        linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.72)),
+        url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat fixed;
+      color: #e7d6aa;
+    }
+    .page-wrap { width: min(1100px, 92%); margin: 0 auto; padding: 40px 0 70px; }
+    .title-box { text-align: center; margin-bottom: 28px; }
+    .title-box h1 {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(30px, 5vw, 54px);
+      letter-spacing: 4px;
+      color: #f0dfb2;
+      text-shadow: 0 0 18px rgba(0,0,0,0.35);
+    }
+    .title-box p {
+      margin: 10px auto 0;
+      max-width: 680px;
+      color: #d8c79c;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .opinie-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .book-panel, .form-panel {
+      background: rgba(8, 8, 8, 0.62);
+      border: 1px solid rgba(224, 206, 158, 0.20);
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+    .book-panel, .form-panel { padding: 28px; }
+    .panel-title {
+      margin: 0 0 18px;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 2px;
+      font-size: 20px;
+      color: #f0dfb2;
+      text-align: center;
+    }
+    .book-shell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .book-scene {
+      position: relative;
+      width: min(100%, 520px);
+      height: 680px;
+      perspective: 2200px;
+    }
+    .book-cover-shadow {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      box-shadow:
+        0 30px 70px rgba(0,0,0,0.50),
+        inset 0 0 0 1px rgba(90, 58, 24, 0.55);
+      pointer-events: none;
+    }
+    .book {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+    .paper {
+      position: absolute;
+      inset: 0;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 1s ease;
+      cursor: default;
+    }
+    .paper.flipped { transform: rotateY(-180deg); }
+    .page-front, .page-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      overflow: hidden;
+      border-radius: 16px;
+      padding: 34px 28px 28px;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.22), transparent 28%),
+        linear-gradient(135deg, #ead8b0 0%, #dbc292 48%, #cfb17b 100%);
+      color: #3f2a14;
+      box-shadow:
+        inset 0 0 0 1px rgba(112, 77, 40, 0.25),
+        inset 0 0 45px rgba(123, 82, 38, 0.10);
+    }
+    .page-front::before, .page-back::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(112, 77, 40, 0.18);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    .page-front { z-index: 2; }
+    .page-back { transform: rotateY(180deg); }
+    .page-content {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .page-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6a4725;
+      font-weight: 600;
+    }
+    .page-number { font-family: 'Cinzel', serif; }
+    .stars {
+      color: #8d5d28;
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .review-text {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.8;
+      font-style: italic;
+      color: #3d2814;
+      padding: 10px 8px;
+      word-break: break-word;
+    }
+    .review-author {
+      text-align: right;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: #5d3b1a;
+    }
+    .book-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .book-btn {
+      min-width: 110px;
+      border: 1px solid rgba(224, 206, 158, 0.35);
+      background: rgba(224, 206, 158, 0.08);
+      color: #f0dfb2;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+    .book-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      background: rgba(224, 206, 158, 0.16);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+    .book-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .book-status {
+      min-width: 130px;
+      text-align: center;
+      font-size: 13px;
+      color: #d8c79c;
+      letter-spacing: 1px;
+    }
+    .empty-state, .loading-state {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: min(100%, 520px);
+      height: 680px;
+      border-radius: 18px;
+      background: rgba(224, 206, 158, 0.08);
+      border: 1px solid rgba(224, 206, 158, 0.18);
+      color: #e7d6aa;
+      text-align: center;
+      padding: 30px;
+      line-height: 1.8;
+    }
+    .form-panel form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .field-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #e6d4a8;
+    }
+    .field-group input, .field-group textarea, .field-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(224, 206, 158, 0.28);
+      border-radius: 14px;
+      padding: 14px 15px;
+      color: #f3e7c9;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+    .field-group input:focus, .field-group textarea:focus, .field-group select:focus {
+      border-color: rgba(224, 206, 158, 0.62);
+      box-shadow: 0 0 0 3px rgba(224, 206, 158, 0.08);
+    }
+    .field-group textarea {
+      min-height: 160px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+    .submit-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #e2c98f, #cfa869);
+      color: #2d1b0d;
+      transition: 0.25s ease;
+      font-weight: 700;
+    }
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+    }
+    .form-msg {
+      min-height: 24px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #e7d6aa;
+    }
+    .note-box {
+      margin-top: 14px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #cdb98b;
+      text-align: center;
+    }
+    @media (max-width: 980px) {
+      .opinie-layout { grid-template-columns: 1fr; }
+      .book-scene, .empty-state, .loading-state { height: 600px; }
+    }
+    @media (max-width: 640px) {
+      .page-wrap { width: 94%; padding-top: 24px; }
+      .book-panel, .form-panel { padding: 18px; border-radius: 18px; }
+      .book-scene, .empty-state, .loading-state { height: 500px; }
+      .page-front, .page-back { padding: 24px 18px 20px; }
+      .review-text { font-size: 16px; }
+      .stars { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <div class="title-box">
+      <h1>Opinie</h1>
+      <p>
+        Każda opinia jest zapisana jak osobna kartka starej księgi.
+        Możesz przewracać strony i czytać kolejne wpisy.
+      </p>
+    </div>
+
+    <div class="opinie-layout">
+      <section class="book-panel">
+        <h2 class="panel-title">Księga opinii</h2>
+
+        <div class="book-shell">
+          <div id="bookArea" class="loading-state">
+            Ładowanie opinii...
+          </div>
+
+          <div class="book-controls">
+            <button id="prevBtn" class="book-btn" disabled>Poprzednia</button>
+            <div id="bookStatus" class="book-status">0 / 0</div>
+            <button id="nextBtn" class="book-btn" disabled>Następna</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="form-panel">
+        <h2 class="panel-title">Dodaj opinię</h2>
+
+        <form id="opiniaForm">
+          <div class="field-group">
+            <label for="imie">Imię</label>
+            <input id="imie" name="imie" type="text" maxlength="40" placeholder="Np. Anna" required>
+          </div>
+
+          <div class="field-group">
+            <label for="tekst">Treść opinii</label>
+            <textarea id="tekst" name="tekst" maxlength="800" placeholder="Napisz swoją opinię..." required></textarea>
+          </div>
+
+          <div class="field-group">
+            <label for="gwiazdki">Ocena</label>
+            <select id="gwiazdki" name="gwiazdki" required>
+              <option value="5">5 gwiazdek</option>
+              <option value="4">4 gwiazdki</option>
+              <option value="3">3 gwiazdki</option>
+              <option value="2">2 gwiazdki</option>
+              <option value="1">1 gwiazdka</option>
+            </select>
+          </div>
+
+          <button class="submit-btn" type="submit">Wyślij opinię</button>
+          <div id="formMsg" class="form-msg"></div>
+        </form>
+
+        <div class="note-box">
+          Nowe opinie zapisują się w bazie. Formularz dodaje je jako oczekujące na zatwierdzenie.
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      where,
+      orderBy,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBVfH2lWIN9_h8_nI3NmnAr19jw0nlZx40",
+      authDomain: "piotrwrozy.firebaseapp.com",
+      projectId: "piotrwrozy",
+      storageBucket: "piotrwrozy.firebasestorage.app",
+      messagingSenderId: "828148388188",
+      appId: "1:828148388188:web:ceee6b95b5db8691c4b199",
+      measurementId: "G-E9XT7M5FFE"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const bookArea = document.getElementById("bookArea");
+    const bookStatus = document.getElementById("bookStatus");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const form = document.getElementById("opiniaForm");
+    const formMsg = document.getElementById("formMsg");
+
+    let reviews = [];
+    let currentIndex = 0;
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text ?? "";
+      return div.innerHTML;
+    }
+
+    function starsString(value) {
+      const count = Number(value) || 0;
+      return "★".repeat(count) + "☆".repeat(5 - count);
+    }
+
+    function updateButtons() {
+      const total = reviews.length;
+      prevBtn.disabled = currentIndex <= 0 || total === 0;
+      nextBtn.disabled = currentIndex >= total - 1 || total === 0;
+      bookStatus.textContent = total ? `${currentIndex + 1} / ${total}` : "0 / 0";
+    }
+
+    function createPaper(review, index, total) {
+      const paper = document.createElement("div");
+      paper.className = "paper";
+      paper.style.zIndex = String(total - index);
+
+      const safeName = escapeHtml(review.imie || "Anonim");
+      const safeText = escapeHtml(review.tekst || "");
+      const stars = starsString(review.gwiazdki);
+
+      paper.innerHTML = `
+        <div class="page-front">
+          <div class="page-content">
+            <div class="page-topline">
+              <span>Księga opinii</span>
+              <span class="page-number">Strona ${index + 1}</span>
+            </div>
+
+            <div class="stars">${stars}</div>
+            <div class="review-text">„${safeText}”</div>
+            <div class="review-author">— ${safeName}</div>
+          </div>
+        </div>
+
+        <div class="page-back">
+          <div class="page-content">
+            <div class="page-topline">
+              <span>Piotr Wróży</span>
+              <span class="page-number">Koniec strony</span>
+            </div>
+
+            <div class="review-text">
+              Przewróć kolejną kartkę, aby przeczytać następną opinię.
+            </div>
+
+            <div class="review-author">— Archiwum opinii</div>
+          </div>
+        </div>
+      `;
+
+      return paper;
+    }
+
+    function renderBook() {
+      if (!reviews.length) {
+        bookArea.className = "empty-state";
+        bookArea.innerHTML = "Brak zatwierdzonych opinii do wyświetlenia.";
+        updateButtons();
+        return;
+      }
+
+      bookArea.className = "";
+      bookArea.innerHTML = `
+        <div class="book-scene">
+          <div class="book" id="book"></div>
+          <div class="book-cover-shadow"></div>
+        </div>
+      `;
+
+      const book = document.getElementById("book");
+
+      reviews.forEach((review, index) => {
+        const paper = createPaper(review, index, reviews.length);
+        if (index < currentIndex) {
+          paper.classList.add("flipped");
+        }
+        book.appendChild(paper);
+      });
+
+      updateButtons();
+    }
+
+    function nextPage() {
+      if (currentIndex >= reviews.length - 1) return;
+      currentIndex += 1;
+      renderBook();
+    }
+
+    function prevPage() {
+      if (currentIndex <= 0) return;
+      currentIndex -= 1;
+      renderBook();
+    }
+
+    prevBtn.addEventListener("click", prevPage);
+    nextBtn.addEventListener("click", nextPage);
+
+    async function loadReviews() {
+      bookArea.className = "loading-state";
+      bookArea.textContent = "Ładowanie opinii...";
+
+      try {
+        const q = query(
+          collection(db, "opinie"),
+          where("zatwierdzona", "==", true),
+          orderBy("timestamp", "desc")
+        );
+
+        const snapshot = await getDocs(q);
+        reviews = snapshot.docs.map(doc => doc.data());
+        currentIndex = 0;
+        renderBook();
+      } catch (error) {
+        console.error(error);
+        bookArea.className = "empty-state";
+        bookArea.textContent = "Nie udało się pobrać opinii z bazy.";
+        reviews = [];
+        currentIndex = 0;
+        updateButtons();
+      }
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const imie = document.getElementById("imie").value.trim();
+      const tekst = document.getElementById("tekst").value.trim();
+      const gwiazdki = Number(document.getElementById("gwiazdki").value);
+
+      if (!imie || !tekst) {
+        formMsg.textContent = "Uzupełnij imię i treść opinii.";
+        return;
+      }
+
+      formMsg.textContent = "Zapisywanie...";
+
+      try {
+        await addDoc(collection(db, "opinie"), {
+          imie,
+          tekst,
+          gwiazdki,
+          zatwierdzona: false,
+          timestamp: serverTimestamp()
+        });
+
+        form.reset();
+        document.getElementById("gwiazdki").value = "5";
+        formMsg.textContent = "Dziękuję. Opinia została zapisana i czeka na zatwierdzenie.";
+      } catch (error) {
+        console.error(error);
+        formMsg.textContent = "Nie udało się zapisać opinii.";
+      }
+    });
+
+    loadReviews();
+  </script>
+</body>
+</html>
