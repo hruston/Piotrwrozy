@@ -472,8 +472,14 @@ h2 {
 }
 
 .footer-strip {
-    position: relative;
-    z-index: 100;
+    /* KLUCZOWE ZMIANY DLA NIERUCHOMEJ STOPKI */
+    position: fixed;     /* Zmieniono z relative na fixed */
+    bottom: 0;           /* Przykleja do samego dołu */
+    left: 0;             /* Zapewnia start od lewej krawędzi */
+    width: 100%;         /* Rozciąga na całą szerokość ekranu */
+    
+    /* TWOJE DOTYCHCZASOWE USTAWIENIA */
+    z-index: 1000;       /* Zwiększono, by na pewno był nad całą treścią */
     flex-shrink: 0;
     background-color: #0b0b0b;
     border-top: 1px solid rgba(224, 206, 158, 0.3);
@@ -482,8 +488,10 @@ h2 {
     justify-content: center;
     align-items: center;
     box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
-    width: 100%;
     overflow: visible;
+    
+    /* POPRAWKA DLA IPHONE (Safe Area) */
+    padding-bottom: env(safe-area-inset-bottom); 
 }
 
 .footer-text {
