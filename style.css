@@ -2,6 +2,7 @@
 html {
     scroll-behavior: smooth;
 }
+/* FIX DLA IOS: Tło w osobnym kontenerze */
 .bg-fixed-layer {
     position: fixed;
     top: 0;
@@ -12,8 +13,7 @@ html {
                       url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
     background-size: cover;
     background-position: center;
-    z-index: -1; /* Tło pod spodem wszystkiego */
-    pointer-events: none; /* Żeby nie blokowało kliknięć w menu */
+    z-index: -1;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
 }
@@ -147,23 +147,14 @@ html {
 body {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    min-height: 100dvh;
-    background-color: #000; /* Kolor bazowy, zanim załaduje się tło */
+    background-color: #000;
     color: #e0ce9e;
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    /* USUNIĘTO position: fixed, background-image itd. */
-}
-
-.main-content {
-    flex: 1 0 auto;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 /* PRESENTATION */
@@ -472,14 +463,9 @@ h2 {
 }
 
 .footer-strip {
-    /* KLUCZOWE ZMIANY DLA NIERUCHOMEJ STOPKI */
-    position: fixed;     /* Zmieniono z relative na fixed */
-    bottom: 0;           /* Przykleja do samego dołu */
-    left: 0;             /* Zapewnia start od lewej krawędzi */
-    width: 100%;         /* Rozciąga na całą szerokość ekranu */
-    
-    /* TWOJE DOTYCHCZASOWE USTAWIENIA */
-    z-index: 1000;       /* Zwiększono, by na pewno był nad całą treścią */
+    position: relative;
+    z-index: 100;
+    margin-top: auto;
     flex-shrink: 0;
     background-color: #0b0b0b;
     border-top: 1px solid rgba(224, 206, 158, 0.3);
@@ -487,11 +473,8 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+    box-shadow: 0 500px 0 500px #0b0b0b;
     overflow: visible;
-    
-    /* POPRAWKA DLA IPHONE (Safe Area) */
-    padding-bottom: env(safe-area-inset-bottom); 
 }
 
 .footer-text {
