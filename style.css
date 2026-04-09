@@ -560,7 +560,7 @@ h2 {
     line-height: 1.6;
 }
 
-.rytual-box.open .rytual-content {
+.rytual-box.active .rytual-content {
     max-height: 2000px;
 }
 
