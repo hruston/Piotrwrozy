@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Kalkulator numerologiczny</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #f5e7c1;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(120, 92, 48, 0.18), transparent 30%),
+        linear-gradient(180deg, #0e0a14 0%, #161021 50%, #0b0811 100%);
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.35), transparent 60%),
+        radial-gradient(1.5px 1.5px at 70% 20%, rgba(255,255,255,0.35), transparent 60%),
+        radial-gradient(2px 2px at 80% 70%, rgba(255,255,255,0.25), transparent 60%),
+        radial-gradient(1.5px 1.5px at 30% 80%, rgba(255,255,255,0.25), transparent 60%),
+        radial-gradient(1.5px 1.5px at 55% 55%, rgba(255,255,255,0.18), transparent 60%);
+      opacity: 0.9;
+    }
+
+    .wrapper {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 48px 18px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #e0ce9e;
+      text-shadow: 0 0 18px rgba(224, 206, 158, 0.18);
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-size: 1rem;
+      color: rgba(245, 231, 193, 0.88);
+    }
+
+    .card {
+      background: rgba(18, 13, 27, 0.82);
+      border: 1px solid rgba(224, 206, 158, 0.22);
+      border-radius: 22px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+      padding: 28px 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      color: #e0ce9e;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    select, button {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 12px;
+      border: 1px solid rgba(224, 206, 158, 0.25);
+      outline: none;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    select {
+      background: rgba(10, 8, 16, 0.92);
+      color: #f5e7c1;
+      padding: 0 14px;
+    }
+
+    select:focus {
+      border-color: rgba(224, 206, 158, 0.7);
+      box-shadow: 0 0 0 3px rgba(224, 206, 158, 0.12);
+    }
+
+    .btn-wrap {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      max-width: 260px;
+      cursor: pointer;
+      padding: 0 20px;
+      background: linear-gradient(135deg, #cbb98a 0%, #e0ce9e 45%, #a88d57 100%);
+      color: #1a1423;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 18px rgba(224, 206, 158, 0.18);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(224, 206, 158, 0.22);
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      text-align: center;
+      line-height: 1.5;
+      font-size: 0.97rem;
+    }
+
+    .message.error {
+      display: block;
+      background: rgba(113, 33, 33, 0.2);
+      border: 1px solid rgba(216, 112, 112, 0.35);
+      color: #ffd3d3;
+    }
+
+    .result {
+      display: none;
+      margin-top: 26px;
+      padding: 24px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(224, 206, 158, 0.2);
+      background: rgba(12, 9, 18, 0.72);
+      animation: fadeIn 0.35s ease;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      text-align: center;
+      color: #e0ce9e;
+      margin-bottom: 10px;
+    }
+
+    .result-date {
+      text-align: center;
+      color: rgba(245, 231, 193, 0.72);
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+    }
+
+    .number-badge {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a1423;
+      background: linear-gradient(135deg, #e0ce9e, #b69759);
+      box-shadow: 0 0 24px rgba(224, 206, 158, 0.25);
+    }
+
+    .result p {
+      line-height: 1.8;
+      color: rgba(245, 231, 193, 0.92);
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: rgba(245, 231, 193, 0.6);
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 680px) {
+      .wrapper { padding: 28px 14px 40px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .hero p { font-size: 0.95rem; }
+      .card { padding: 22px 14px; }
+      .result h3 { font-size: 1.45rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <main class="wrapper">
+    <section class="hero">
+      <h1>Kalkulator Numerologiczny</h1>
+      <p>
+        Wybierz swoją datę urodzenia i sprawdź, jaka liczba numerologiczna jest z nią związana.
+        Poniżej otrzymasz krótki opis energii tej liczby w spokojnym, pasującym do strony klimacie.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Data urodzenia</h2>
+
+      <div class="form-grid">
+        <select id="day">
+          <option value="">Dzień</option>
+        </select>
+
+        <select id="month">
+          <option value="">Miesiąc</option>
+        </select>
+
+        <select id="year">
+          <option value="">Rok</option>
+        </select>
+      </div>
+
+      <div class="btn-wrap">
+        <button id="calculateBtn">Oblicz liczbę</button>
+      </div>
+
+      <div id="errorMessage" class="message"></div>
+
+      <div id="resultBox" class="result">
+        <div class="number-badge" id="numberBadge">1</div>
+        <h3 id="resultTitle">Twoja liczba numerologiczna</h3>
+        <div class="result-date" id="resultDate"></div>
+        <p id="resultText"></p>
+      </div>
+
+      <div class="footer-note">
+        To jest autorska, uproszczona wersja kalkulatora oparta na klasycznej redukcji cyfr daty urodzenia.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const daySelect = document.getElementById("day");
+    const monthSelect = document.getElementById("month");
+    const yearSelect = document.getElementById("year");
+    const calculateBtn = document.getElementById("calculateBtn");
+    const errorMessage = document.getElementById("errorMessage");
+    const resultBox = document.getElementById("resultBox");
+    const numberBadge = document.getElementById("numberBadge");
+    const resultTitle = document.getElementById("resultTitle");
+    const resultDate = document.getElementById("resultDate");
+    const resultText = document.getElementById("resultText");
+
+    const monthNames = [
+      "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
+      "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
+    ];
+
+    const meanings = {
+      1: "Jedynka niesie energię samodzielności, inicjatywy i odwagi. Często wiąże się z potrzebą działania po swojemu, z wyraźnym charakterem i naturalnym pędem do rozpoczynania nowych rzeczy.",
+      2: "Dwójka mówi o wrażliwości, relacjach i wyczuciu drugiego człowieka. To energia delikatniejsza, oparta na harmonii, współpracy i umiejętności budowania porozumienia.",
+      3: "Trójka łączy się z komunikacją, lekkością i kreatywnym wyrażaniem siebie. Często daje łatwość mówienia, tworzenia i przyciągania uwagi swoją obecnością.",
+      4: "Czwórka symbolizuje stabilność, porządek i konkret. To liczba osób, które cenią solidne fundamenty, odpowiedzialność i systematyczne budowanie czegoś trwałego.",
+      5: "Piątka przynosi ruch, zmianę i potrzebę wolności. To energia ludzi ciekawych świata, lubiących doświadczenia, nowe kierunki i życie, w którym dużo się dzieje.",
+      6: "Szóstka jest związana z troską, rodziną i odpowiedzialnością za innych. Niesie ciepło, opiekuńczość oraz potrzebę tworzenia bezpieczeństwa i dobrej atmosfery wokół siebie.",
+      7: "Siódemka to liczba refleksji, intuicji i głębszego spojrzenia. Często łączy się z potrzebą zrozumienia sensu, analizą, rozwojem wewnętrznym i większą uważnością.",
+      8: "Ósemka ma w sobie siłę, ambicję i sprawczość. To energia związana z organizacją, decyzjami, zarządzaniem oraz budowaniem konkretnego wpływu w życiu materialnym.",
+      9: "Dziewiątka niesie empatię, dojrzałość i szerokie spojrzenie na ludzi oraz wydarzenia. To liczba zamykania cykli, mądrości życiowej i potrzeby robienia czegoś z większym sensem.",
+      11: "Jedenastka jest liczbą mistrzowską i bywa łączona z silną intuicją, inspiracją oraz subtelnym wyczuwaniem energii. Często wskazuje na większą wrażliwość i wewnętrzne prowadzenie.",
+      22: "Dwudziestka dwójka to liczba mistrzowska związana z dużym potencjałem budowania czegoś trwałego i znaczącego. Łączy wizję z możliwością realnego działania na większą skalę.",
+      33: "Trzydziestka trójka jest liczbą mistrzowską kojarzoną z wsparciem, służbą i wyjątkowo silnym sercem skierowanym ku innym. To energia odpowiedzialności, współczucia i duchowej dojrzałości."
+    };
+
+    function populateSelects() {
+      for (let d = 1; d <= 31; d++) {
+        const option = document.createElement("option");
+        option.value = d;
+        option.textContent = d;
+        daySelect.appendChild(option);
+      }
+
+      monthNames.forEach((month, index) => {
+        const option = document.createElement("option");
+        option.value = index + 1;
+        option.textContent = month;
+        monthSelect.appendChild(option);
+      });
+
+      const currentYear = new Date().getFullYear();
+      for (let y = currentYear; y >= 1920; y--) {
+        const option = document.createElement("option");
+        option.value = y;
+        option.textContent = y;
+        yearSelect.appendChild(option);
+      }
+    }
+
+    function isValidDate(day, month, year) {
+      const date = new Date(year, month - 1, day);
+      return (
+        date.getFullYear() === Number(year) &&
+        date.getMonth() === Number(month) - 1 &&
+        date.getDate() === Number(day)
+      );
+    }
+
+    function reduceNumber(num) {
+      while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
+        num = num
+          .toString()
+          .split("")
+          .reduce((sum, digit) => sum + Number(digit), 0);
+      }
+      return num;
+    }
+
+    function calculateNumerology(day, month, year) {
+      const digits = `${day}${month}${year}`.replace(/\D/g, "");
+      const initialSum = digits.split("").reduce((sum, digit) => sum + Number(digit), 0);
+      return reduceNumber(initialSum);
+    }
+
+    function showError(text) {
+      errorMessage.textContent = text;
+      errorMessage.className = "message error";
+      resultBox.classList.remove("show");
+    }
+
+    function clearError() {
+      errorMessage.textContent = "";
+      errorMessage.className = "message";
+    }
+
+    calculateBtn.addEventListener("click", function () {
+      const day = daySelect.value;
+      const month = monthSelect.value;
+      const year = yearSelect.value;
+
+      if (!day || !month || !year) {
+        showError("Wybierz dzień, miesiąc i rok.");
+        return;
+      }
+
+      if (!isValidDate(day, month, year)) {
+        showError("Ta data wygląda na nieprawidłową. Sprawdź wybór jeszcze raz.");
+        return;
+      }
+
+      clearError();
+
+      const result = calculateNumerology(day, month, year);
+      const formattedDate = `${day} ${monthNames[Number(month) - 1]} ${year}`;
+
+      numberBadge.textContent = result;
+      resultTitle.textContent = `Twoja liczba numerologiczna: ${result}`;
+      resultDate.textContent = formattedDate;
+      resultText.textContent = meanings[result] || "Dla tej liczby nie ma jeszcze przygotowanego opisu.";
+
+      resultBox.classList.add("show");
+      resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    populateSelects();
+  </script>
+</body>
+</html>
