@@ -58,13 +58,69 @@ function toggleRytual(element) {
     }
 }
 
+// Opisy cennika
+
 function toggleOpis(element) {
     const item = element.parentElement;
+    const allItems = document.querySelectorAll(".item");
+
+    // zamknij wszystkie inne
+    allItems.forEach(el => {
+        if (el !== item) {
+            el.classList.remove("open");
+
+            const toggle = el.querySelector(".opis-toggle");
+            if (toggle) toggle.innerText = "— Rozwiń opis —";
+        }
+    });
+
+    // toggle klikniętego
     item.classList.toggle("open");
 
     if (item.classList.contains("open")) {
         element.innerText = "— Zwiń opis —";
     } else {
         element.innerText = "— Rozwiń opis —";
+    }
+}
+
+// Księga wpisów
+
+let currentPage = 0;
+
+function renderBook(opinie) {
+    const container = document.getElementById("book-pages");
+    container.innerHTML = "";
+
+    opinie.forEach((op, index) => {
+        const stars = "★".repeat(op.gwiazdki) + "☆".repeat(5 - op.gwiazdki);
+
+        const page = document.createElement("div");
+        page.classList.add("book-page");
+        page.style.zIndex = opinie.length - index;
+
+        page.innerHTML = `
+            <div class="stars">${stars}</div>
+            <div class="text">"${op.tekst}"</div>
+            <div class="author">— ${op.imie}</div>
+        `;
+
+        container.appendChild(page);
+    });
+}
+
+function nextPage() {
+    const pages = document.querySelectorAll(".book-page");
+    if (currentPage < pages.length) {
+        pages[currentPage].classList.add("flipped");
+        currentPage++;
+    }
+}
+
+function prevPage() {
+    const pages = document.querySelectorAll(".book-page");
+    if (currentPage > 0) {
+        currentPage--;
+        pages[currentPage].classList.remove("flipped");
     }
 }
