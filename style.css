@@ -265,7 +265,7 @@ h1 {
 
 h2 {
     font-family: 'Cinzel', serif;
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 4px;
     margin: 60px 0 25px;
     opacity: 0.9;
@@ -314,13 +314,14 @@ h2 {
 
 .price {
     font-weight: bold;
+    font-size: 13px;
     color: #fff;
     white-space: nowrap;
 }
 
 .opis-toggle {
     margin-top: 6px;
-    font-size: 10px;
+    font-size: 13px;
     letter-spacing: 1.5px;
     opacity: 0.75;
     cursor: pointer;
@@ -333,7 +334,7 @@ h2 {
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.45s ease, opacity 0.3s ease, margin-top 0.3s ease;
-    font-size: 11px;
+    font-size: 13px;
     color: #cbb98a;
     line-height: 1.45;
     text-align: left;
@@ -493,7 +494,7 @@ h2 {
 .about-box {
             max-width: 760px;
             margin: 34px auto 0;
-            color: #f1e7ca;
+            color: #CBB98A;
             font-size: 15px;
             line-height: 2;
             letter-spacing: 0.7px;
@@ -568,6 +569,12 @@ h2 {
     height: auto;
     margin-bottom: 10px;
     opacity: 0.9;
+    transition: transform 0.3s ease;
+}
+
+/* PODŚWIETLANIE I PODNIESIENIE POZYCJI CENNIKA PO NAJECHANIU */
+.rytual-icon:hover {
+    transform: scale(1.1);
 }
 
 .cennik-wrapper .social-btn.bk {
@@ -578,3 +585,278 @@ h2 {
     margin: 20px auto;
     justify-content: center;
 }
+
+/* KSIĘGA WPISÓW */
+
+/* ── FORMULARZ ── */
+        #ksiega-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 40px auto 0;
+            max-width: 560px;
+        }
+
+        #ksiega-form input,
+        #ksiega-form textarea {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(224, 206, 158, 0.25);
+            border-radius: 6px;
+            color: #e0ce9e;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            resize: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #ksiega-form input::placeholder,
+        #ksiega-form textarea::placeholder {
+            color: rgba(224, 206, 158, 0.35);
+            letter-spacing: 1px;
+        }
+
+        #ksiega-form input:focus,
+        #ksiega-form textarea:focus {
+            border-color: rgba(224, 206, 158, 0.6);
+            box-shadow: 0 0 16px rgba(224, 206, 158, 0.08);
+        }
+
+        #submitBtn {
+            align-self: center;
+            background: transparent;
+            border: 1px solid rgba(224, 206, 158, 0.5);
+            border-radius: 50px;
+            color: #e0ce9e;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            padding: 14px 36px;
+            text-transform: uppercase;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #submitBtn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(224, 206, 158, 0.08);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #submitBtn:hover {
+            border-color: #e0ce9e;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(224, 206, 158, 0.2);
+            transform: translateY(-2px);
+        }
+
+        #submitBtn:hover::before { opacity: 1; }
+
+        #submitBtn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ── KOMUNIKAT PO WYSŁANIU ── */
+        #send-msg {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: rgba(224, 206, 158, 0.7);
+            min-height: 20px;
+            margin-top: 4px;
+            transition: opacity 0.4s;
+        }
+
+        /* ── SEPARATOR ── */
+        .ksiega-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 50px auto 40px;
+            max-width: 560px;
+        }
+
+        .ksiega-divider::before,
+        .ksiega-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(224,206,158,0.4), transparent);
+        }
+
+        .ksiega-divider-icon {
+            color: rgba(224, 206, 158, 0.5);
+            font-size: 14px;
+            letter-spacing: 6px;
+        }
+
+        /* ── LICZNIK ── */
+        #opinii-count {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: rgba(224, 206, 158, 0.45);
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        /* ── SIATKA KART ── */
+        #entries-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        #entries-container.loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+        }
+
+        /* ── KARTA OPINII ── */
+        .entry-card {
+            position: relative;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(224, 206, 158, 0.15);
+            border-radius: 8px;
+            padding: 22px 20px 18px;
+            text-align: left;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(22px);
+            animation: cardIn 0.6s ease forwards;
+        }
+
+        @keyframes cardIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Subtelny złoty połysk w rogu */
+        .entry-card::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(224,206,158,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Gwiazdka dekoracyjna */
+        .entry-card::after {
+            content: '✦';
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 9px;
+            color: rgba(224, 206, 158, 0.25);
+        }
+
+        .entry-card:hover {
+            border-color: rgba(224, 206, 158, 0.3);
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-3px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .entry-quote {
+            font-size: 36px;
+            line-height: 1;
+            color: rgba(224, 206, 158, 0.18);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 4px;
+            margin-top: -6px;
+            display: block;
+        }
+
+        .entry-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            line-height: 1.75;
+            color: rgba(224, 206, 158, 0.8);
+            letter-spacing: 0.4px;
+            margin: 0 0 16px;
+            word-break: break-word;
+        }
+
+        .entry-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(224, 206, 158, 0.1);
+            padding-top: 12px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .entry-autor {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #e0ce9e;
+            text-transform: uppercase;
+        }
+
+        .entry-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: rgba(224, 206, 158, 0.35);
+        }
+
+        /* ── PUSTE STANY ── */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-state p {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            color: rgba(224, 206, 158, 0.4);
+        }
+
+        /* ── LOADING SPINNER ── */
+        .loader {
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(224,206,158,0.15);
+            border-top-color: rgba(224,206,158,0.6);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── GWIAZDKI TYTUŁOWE ── */
+        .ksiega-title-wrap {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .ksiega-stars {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 10px;
+            color: rgba(224,206,158,0.4);
+            margin-bottom: 10px;
+        }
