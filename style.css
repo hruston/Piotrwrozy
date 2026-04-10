@@ -561,14 +561,14 @@ h2 {
 
 .rytual-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .rytual-icon {
     width: 60px;
     height: auto;
     margin-bottom: 20px;
-    margin-top: 15px;
+    margin-top: 30px;
     opacity: 0.9;
     transition: transform 0.3s ease;
 }
