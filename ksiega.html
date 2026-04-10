@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>Tarot & Doradztwo Duchowe - Księga Gości</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="java.js" defer></script>
+</head>
+<body>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+        <img src="https://images.icon-icons.com/3871/PNG/512/menu_icon_244496.png" alt="Menu">
+    </div>
+
+    <nav id="side-menu">
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
+        <ul class="nav-links">
+            <li><a href="index.html" onclick="toggleMenu()">Start</a></li>
+            <li><a href="omnie.html#omnie" onclick="toggleMenu()">O mnie</a></li>
+            <li><a href="index.html#cennik" onclick="toggleMenu()">Cennik</a></li>
+            <li><a href="rytualy.html#rytualy" onclick="toggleMenu()">Rytuały</a></li>
+            <li><a href="rytualy.html#kontakt" onclick="toggleMenu()">Kontakt</a></li>
+            <li><a href="ksiega.html#ksiega" onclick="toggleMenu()">Księga wpisów</a></li>
+            <li><a href="https://bornself.pl/" target="_blank">Kalkulator Numerologiczny</a></li>
+            <li><a href="https://ehoroskop.pl/ascendant" target="_blank">Kalkulator Ascendentu</a></li>
+            <li><a href="gra.html" target="_blank">Magia i Gry</a></li>
+            <li class="bk-wrapper">
+                <a href="https://buycoffee.to/petter_tarot" target="_blank" class="nav-bk">
+                    <i class="fas fa-coffee"></i> POSTAW KAWĘ
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
+    <div class="bg-fixed-layer"></div>
+
+    <header class="presentation">
+        <img src="https://raw.githubusercontent.com/hruston/WatchSmart/refs/heads/main/b5aef392-b7e7-4b25-82af-9132484e733b.jpg" alt="Piotr" class="profile-img">
+        <div class="profile-name">Piotr Kowalski</div>
+        <div class="profile-bio">Wróżbita & Medium</div>
+        <div class="profile-bio">Łączę światy, odczytując szeptane przekazy.</div>
+    </header>
+
+    <div class="cennik-wrapper" id="rytualy">
+        <div class="stars-overlay"></div>
+        <div class="cennik-container">
+
+            <!-- Tytuł sekcji -->
+            <div class="ksiega-title-wrap" id="ksiega">
+                <h1 style="margin: 0 0 8px;">Księga Gości</h1>
+                <div class="ksiega-divider">
+                <span class="ksiega-divider-icon">✦ ✦ ✦</span>
+            </div>
+                <p style="font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:2px; color:rgba(224,206,158,0.5); margin: 16px 0 0; text-transform:uppercase;">
+                    Zostaw swój ślad w tej przestrzeni
+                </p>
+            </div>
+
+            <!-- Formularz -->
+            <div id="ksiega-form">
+                <input type="text" id="username" placeholder="Twoje imię lub pseudonim" maxlength="50">
+                <textarea id="comment" rows="4" placeholder="Twoja opinia, wrażenia, słowa..." maxlength="500"></textarea>
+                <div id="send-msg"></div>
+                <button id="submitBtn">
+                    <i class="fas fa-feather-alt" style="margin-right:8px; font-size:11px;"></i>
+                    Wpisz się do księgi
+                </button>
+            </div>
+
+            <!-- Separator -->
+            <div class="ksiega-divider">
+                <span class="ksiega-divider-icon">✦ ✦ ✦</span>
+            </div>
+
+            <!-- Licznik -->
+            <div id="opinii-count"></div>
+
+            <!-- Karty opinii -->
+            <div id="entries-container" class="loading">
+                <div class="loader"></div>
+            </div>
+            <div class="gold-accent"></div>
+
+        </div>
+    </div>
+
+    <div class="social-reveal-section" id="kontakt">
+        <div class="social-title reveal">ZNAJDŹ MNIE W SIECI</div>
+        <div class="social-buttons reveal">
+            <a href="https://www.facebook.com/share/g/1CNKUNN35h/?mibextid=wwXIfr" target="_blank" class="social-btn fb">
+                <i class="fa-brands fa-facebook-f"></i> FACEBOOK
+            </a>
+            <a href="https://www.instagram.com/petter_tarot" target="_blank" class="social-btn ig">
+                <i class="fa-brands fa-instagram"></i> INSTAGRAM
+            </a>
+            <a href="http://snapchat.com/add/Petter_me" target="_blank" class="social-btn sh">
+                <i class="fa-brands fa-snapchat"></i> SNAPCHAT
+            </a>
+            <a href="https://buycoffee.to/petter_tarot" target="_blank" class="social-btn bk">
+                <i class="fas fa-coffee"></i> POSTAW KAWĘ
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer-strip">
+        <div class="stars-overlay"></div>
+        <div class="footer-text">© 2026 PIOTR KOWALSKI</div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, where }
+            from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVfH2lWIN9_h8_nI3NmnAr19jw0nlZx40",
+            authDomain: "piotrwrozy.firebaseapp.com",
+            projectId: "piotrwrozy",
+            storageBucket: "piotrwrozy.firebasestorage.app",
+            messagingSenderId: "828148388188",
+            appId: "1:828148388188:web:ceee6b95b5db8691c4b199",
+            measurementId: "G-E9XT7M5FFE"
+        };
+
+        const app    = initializeApp(firebaseConfig);
+        const db     = getFirestore(app);
+        const colRef = collection(db, "opinie");
+
+        /* ── FORMULARZ ── */
+        const btn      = document.getElementById('submitBtn');
+        const sendMsg  = document.getElementById('send-msg');
+
+        btn.onclick = async () => {
+            const nameInput = document.getElementById('username');
+            const msgInput  = document.getElementById('comment');
+
+            if (!nameInput.value.trim() || !msgInput.value.trim()) {
+                sendMsg.textContent = '✦  Wpisz imię i treść opinii  ✦';
+                sendMsg.style.color = 'rgba(224,206,158,0.6)';
+                return;
+            }
+
+            btn.disabled = true;
+            sendMsg.textContent = '';
+
+            try {
+                await addDoc(colRef, {
+                    autor:  nameInput.value.trim(),
+                    tresc:  msgInput.value.trim(),
+                    data:   new Date(),
+                    status: "oczekujacy"
+                });
+                nameInput.value = '';
+                msgInput.value  = '';
+                sendMsg.style.color = 'rgba(224,206,158,0.75)';
+                sendMsg.textContent = '✦  Dziękuję — wpis pojawi się po zatwierdzeniu  ✦';
+            } catch (e) {
+                sendMsg.style.color = '#c85a5a';
+                sendMsg.textContent = 'Błąd zapisu: ' + e.message;
+            } finally {
+                btn.disabled = false;
+            }
+        };
+
+        /* ── POBIERANIE OPINII ── */
+        const container  = document.getElementById('entries-container');
+        const countEl    = document.getElementById('opinii-count');
+        const q = query(colRef, where("status", "==", "zatwierdzony"));
+
+        onSnapshot(q, (snapshot) => {
+            container.classList.remove('loading');
+
+            /* Sortuj od najnowszych po stronie JS */
+            const docs = snapshot.docs.slice().sort((a, b) => {
+                const da  = a.data().data ? a.data().data.toDate() : new Date(0);
+                const db2 = b.data().data ? b.data().data.toDate() : new Date(0);
+                return db2 - da;
+            });
+
+            if (docs.length === 0) {
+                countEl.textContent = '';
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p>✦ &nbsp; Bądź pierwszą osobą, która zostawi swój ślad &nbsp; ✦</p>
+                    </div>`;
+                return;
+            }
+
+            /* Licznik */
+            countEl.textContent = docs.length === 1
+                ? '1 wpis w księdze'
+                : docs.length + ' wpisów w księdze';
+
+            /* Karty — delay dla efektu kaskadowego */
+            let html = '';
+            docs.forEach((doc, i) => {
+                const item = doc.data();
+                const date = item.data
+                    ? item.data.toDate().toLocaleDateString('pl-PL', { day:'numeric', month:'long', year:'numeric' })
+                    : '';
+                const delay = Math.min(i * 80, 600);
+
+                html += `
+                <div class="entry-card" style="animation-delay: ${delay}ms">
+                    <span class="entry-quote">"</span>
+                    <p class="entry-text">${escapeHtml(item.tresc)}</p>
+                    <div class="entry-footer">
+                        <span class="entry-autor">${escapeHtml(item.autor)}</span>
+                        <span class="entry-date">${date}</span>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+
+        }, (error) => {
+            container.classList.remove('loading');
+            container.innerHTML = `<div class="empty-state"><p style="color:#c85a5a">Błąd połączenia z bazą danych</p></div>`;
+            console.error(error);
+        });
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+    </script>
+
+</body>
+</html>
