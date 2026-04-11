@@ -940,66 +940,73 @@ h2 {
 
 /* --- PŁYWAJĄCA CHMURKA KONTAKTU (FAB) --- */
 
-/* GŁÓWNY KONTENER SZUFLADY */
-.contact-popup-fab {
-    position: fixed;
-    bottom: 5%;
-    left: -340px; /* Całkowicie schowany formularz */
-    width: 340px;
-    background: #0b0b0b;
-    border: 1px solid #cbb98a;
-    border-right: none;
-    border-radius: 20px 0 0 20px;
-    z-index: 10000;
-    box-shadow: -15px 0 40px rgba(0, 0, 0, 0.7);
-    transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Kiedy szuflada jest wysunięta */
-.contact-popup-fab.active {
-    right: 0;
-}
-
-/* METKA (WIELKOŚĆ HAMBURGERA) */
+/* Ikonka chmurki w prawym dolnym rogu */
 .contact-bubble-fab {
-    position: absolute;
-    right: -45px; /* Szerokość metki */
-    top: 77%;      /* Możesz ustawić top: 0, aby metka była w linii z górą formularza, lub 50% */
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Przeniesiona na lewą stronę */
     width: 45px;
     height: 45px;
-    background: #cbb98a;
-    border-radius: 12px 0 0 12px;
+    background: #D8C279; /* Twoje złoto (jak w h1) */
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 26px;
+    color: #000; /* Czarna ikonka dla kontrastu na złocie */
     cursor: pointer;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-    color: #000;
+    z-index: 10000; /* Nad wszystkimi elementami */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.contact-bubble-fab svg {
-    width: 30px;
-    height: 30px;
-    transition: transform 0.3s ease;
+.menu-icon img {
+    width: 100%;
+    filter: invert(85%) sepia(20%) saturate(500%) hue-rotate(10deg);
 }
 
-.contact-bubble-fab:hover svg {
-    transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 0 8px rgba(224, 206, 158, 0.8));
+.menu-icon:hover {
+    
+    
 }
 
-/* RESZTA FORMULARZA (Luksusowy design) */
+.contact-bubble-fab:hover {
+    transform: scale(1.1) rotate(5deg); /* Delikatny obrót */
+    filter: drop-shadow(0 0 8px rgba(224, 206, 158, 0.8)); /* Zmiana koloru po najechaniu */
+}
+
+/* Okno formularza kontaktowego */
+.contact-popup-fab {
+    position: fixed;
+    bottom: 100px;
+    left: 25px; /* Nad chmurką, po prawej stronie */
+    width: 320px;
+    background: #0b0b0b; /* Bardzo ciemne tło (pasujące do cennika) */
+    border: 1px solid rgba(224, 206, 158, 0.4);
+    border-radius: 18px;
+    display: none; /* Początkowo ukryte */
+    flex-direction: column;
+    z-index: 9999;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+    overflow: hidden;
+    animation: slideInFab 0.3s ease-out;
+}
+
+/* Stan aktywny (dodawany przez JavaScript) */
+.contact-popup-fab.active {
+    display: flex;
+}
+
+/* Nagłówek okienka kontaktowego */
 .popup-header-fab {
-    padding: 25px 25px 15px;
+    background: #D8C279; /* Twoje złoto */
+    color: #000;
+    padding: 12px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.popup-header-fab h3 {
     font-family: 'Cinzel', serif;
-    color: #e0ce9e;
-    margin: 0;
+    font-weight: 700;
     font-size: 16px;
     letter-spacing: 1px;
 }
@@ -1007,74 +1014,82 @@ h2 {
 .popup-header-fab button {
     background: none;
     border: none;
-    color: #cbb98a;
     font-size: 24px;
+    color: #000;
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
+.popup-header-fab button:hover {
+    color: #fff;
+}
+
+/* Sam formularz wewnątrz okienka */
 .popup-form-fab {
-    padding: 0 25px 30px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
-/* PŁYWAJĄCE ETYKIETY */
-.input-group {
-    position: relative;
-}
-
-.input-group input, .input-group textarea {
-    width: 100%;
-    padding: 10px 0;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(203, 185, 138, 0.3);
+.popup-form-fab input, 
+.popup-form-fab textarea {
+    background: rgba(255,255,255,0.03); /* Bardzo subtelne tło */
+    border: 1px solid rgba(224, 206, 158, 0.2);
+    padding: 12px 15px;
     color: #fff;
-    outline: none;
+    border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.input-group label {
-    position: absolute;
-    left: 0;
-    top: 10px;
-    color: rgba(255, 255, 255, 0.4);
-    transition: 0.3s;
-    pointer-events: none;
-    font-size: 13px;
+.popup-form-fab input:focus, 
+.popup-form-fab textarea:focus {
+    outline: none;
+    border-color: #D8C279; /* Pełne złoto po kliknięciu */
+    box-shadow: 0 0 10px rgba(224, 206, 158, 0.2);
 }
 
-.input-group input:focus ~ label,
-.input-group input:valid ~ label,
-.input-group textarea:focus ~ label,
-.input-group textarea:valid ~ label {
-    top: -15px;
-    font-size: 13px;
-    color: #cbb98a;
+.popup-form-fab textarea {
+    resize: none;
+    height: 100px;
 }
 
-.submit-btn-fab {
-    background: #cbb98a;
+/* Przycisk wyślij */
+.popup-form-fab button {
+    background: #D8C279; /* Twoje złoto */
     border: none;
     padding: 12px;
-    font-family: 'Cinzel', serif;
-    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
-    border-radius: 4px;
-}
-
-.submit-btn-fab:hover {
-    background: #e0ce9e;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    border-radius: 8px;
     color: #000;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* Zapobiega powiększaniu na iPhone */
-input[type="text"],
-input[type="email"],
-input[type="number"],
-textarea,
-select {
-    font-size: 16px !important;
+.popup-form-fab button:hover {
+    background: #D8C279; /* Biały po najechaniu */
+}
+
+.popup-form-fab button:active {
+    transform: scale(0.98); /* Efekt wciśnięcia */
+}
+
+/* Animacja wjazdu okienka */
+@keyframes slideInFab {
+    from { opacity: 0; transform: translateY(30px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Responsywność dla małych ekranów */
+@media (max-width: 480px) {
+    .contact-popup-fab {
+        width: 90%;
+        right: 5%;
+        left: 5%;
+        bottom: 95px;
+    }
 }
