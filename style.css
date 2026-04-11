@@ -941,8 +941,8 @@ h2 {
 /* Ikonka chmurki w prawym dolnym rogu */
 .contact-bubble-fab {
     position: fixed;
-    bottom: 50px;
-    right: 50px; /* Przeniesiona na prawą stronę */
+    bottom: 25px;
+    right: 25px; /* Przeniesiona na prawą stronę */
     width: 65px;
     height: 65px;
     background: #cbb98a; /* Twoje złoto (jak w h1) */
