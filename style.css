@@ -8,13 +8,14 @@ html {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Używamy 100%, nie vh, żeby uniknąć skoków przy chowaniu paska adresu */
+    height: 100%;
     background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
                       url('https://raw.githubusercontent.com/hruston/Piotrwrozy/refs/heads/main/Strona%20Piotr/—Pngtree—landscape%20with%20milky%20way%20galaxy_15462129.png');
     background-size: cover;
     background-position: center;
     z-index: -1;
-    will-change: transform; /* Optymalizacja dla urządzeń mobilnych */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 /* Ikonka menu */
@@ -141,19 +142,20 @@ html {
 }
 
 html {
-    background-color: #0b0b0b; 
     scroll-behavior: smooth;
 }
 
 body {
     margin: 0;
     padding: 0;
-    /* Przezroczyste tło body pozwala widzieć .bg-fixed-layer */
-    background-color: transparent; 
-    min-height: 100vh;
+    background-color: #000;
+    color: #e0ce9e;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    min-height: 100vh;
 }
 
 /* PRESENTATION */
@@ -473,7 +475,9 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* USUNIĘTO box-shadow i position: sticky */
+    box-shadow: 0 500px 0 500px #0b0b0b;
+    overflow: visible;
+    position: sticky;
 }
 
 .footer-text {
@@ -940,7 +944,7 @@ h2 {
 .contact-popup-fab {
     position: fixed;
     bottom: 5%;
-    right: -340px; /* Całkowicie schowany formularz */
+    left: -340px; /* Całkowicie schowany formularz */
     width: 340px;
     background: #0b0b0b;
     border: 1px solid #cbb98a;
@@ -959,7 +963,7 @@ h2 {
 /* METKA (WIELKOŚĆ HAMBURGERA) */
 .contact-bubble-fab {
     position: absolute;
-    left: -45px; /* Szerokość metki */
+    right: -45px; /* Szerokość metki */
     top: 77%;      /* Możesz ustawić top: 0, aby metka była w linii z górą formularza, lub 50% */
     width: 45px;
     height: 45px;
@@ -1046,7 +1050,7 @@ h2 {
 .input-group textarea:focus ~ label,
 .input-group textarea:valid ~ label {
     top: -15px;
-    font-size: 16px;
+    font-size: 13px;
     color: #cbb98a;
 }
 
