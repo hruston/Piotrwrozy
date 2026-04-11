@@ -943,9 +943,8 @@ h2 {
 /* GŁÓWNY KONTENER SZUFLADY */
 .contact-popup-fab {
     position: fixed;
-    top: 50%;
+    bottom: 5%;
     right: -340px; /* Całkowicie schowany formularz */
-    transform: translateY(-50%);
     width: 340px;
     background: #0b0b0b;
     border: 1px solid #cbb98a;
@@ -965,7 +964,7 @@ h2 {
 .contact-bubble-fab {
     position: absolute;
     left: -45px; /* Szerokość metki */
-    top: 75%;      /* Możesz ustawić top: 0, aby metka była w linii z górą formularza, lub 50% */
+    top: 77%;      /* Możesz ustawić top: 0, aby metka była w linii z górą formularza, lub 50% */
     width: 45px;
     height: 45px;
     background: #cbb98a;
@@ -985,7 +984,8 @@ h2 {
 }
 
 .contact-bubble-fab:hover svg {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 8px rgba(224, 206, 158, 0.8));
 }
 
 /* RESZTA FORMULARZA (Luksusowy design) */
@@ -1050,7 +1050,7 @@ h2 {
 .input-group textarea:focus ~ label,
 .input-group textarea:valid ~ label {
     top: -15px;
-    font-size: 11px;
+    font-size: 13px;
     color: #cbb98a;
 }
 
@@ -1066,6 +1066,6 @@ h2 {
 }
 
 .submit-btn-fab:hover {
-    background: #fff;
+    background: #e0ce9e;
     color: #000;
 }
