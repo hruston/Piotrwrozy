@@ -129,7 +129,7 @@ html {
 }
 
 .nav-bk:hover {
-    color: #fff !important;
+    color: #e0ce9e !important;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 255, 164, 0.5);
     filter: brightness(1.1);
@@ -305,7 +305,7 @@ h2 {
 }
 
 .item-name {
-    font-size: 13px;
+    font-size: 16px;
     letter-spacing: 1.5px;
 }
 
@@ -317,14 +317,14 @@ h2 {
 
 .price {
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
     color: #fff;
     white-space: nowrap;
 }
 
 .opis-toggle {
     margin-top: 6px;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 1.5px;
     opacity: 0.75;
     cursor: pointer;
@@ -455,13 +455,6 @@ h2 {
 
 .bk {
     background-color: #05A862;
-}
-
-.footer-info {
-    margin-top: 80px;
-    font-size: 18px;
-    letter-spacing: 1.5px;
-    line-height: 2.2;
 }
 
 .footer-strip {
