@@ -945,9 +945,9 @@ h2 {
     position: fixed;
     bottom: 20px;
     left: 20px; /* Przeniesiona na lewą stronę */
-    width: 45px;
-    height: 45px;
-    background: #D8C279; /* Twoje złoto (jak w h1) */
+    width: 40px;
+    height: 40px;
+    background: transparent !important;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -958,16 +958,20 @@ h2 {
     z-index: 10000; /* Nad wszystkimi elementami */
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
     transition: transform 0.3s ease, background 0.3s ease;
+    overflow: hidden;
 }
 
-.menu-icon img {
-    width: 100%;
-    filter: invert(85%) sepia(20%) saturate(500%) hue-rotate(10deg);
-}
-
-.menu-icon:hover {
+.fab-icon-png {
+    width: 100%;  /* Obrazek wypełnia cały przycisk */
+    height: 100%;
+    object-fit: cover; /* Grafika pokrywa cały obszar bez deformacji */
+    display: block;
     
+    /* MAGIA: Zastosowanie filtra SVG zdefiniowanego w HTML, 
+       który sprawia, że czarna koperta staje się przezroczysta */
+    filter: url(#black-to-alpha); 
     
+    transition: transform 0.3s ease;
 }
 
 .contact-bubble-fab:hover {
