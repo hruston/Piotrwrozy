@@ -124,3 +124,26 @@ function prevPage() {
         pages[currentPage].classList.remove("flipped");
     }
 }
+
+// Formularz kontaktowy
+
+/* --- Obsługa pływającej chmurki kontaktu (FAB) --- */
+// Funkcja otwierająca/zamykająca formularz po kliknięciu w ikonkę
+function toggleFloatingContactForm() {
+    const popup = document.getElementById('contact-popup-fab');
+    popup.classList.toggle('active');
+}
+
+// Funkcja zamykająca formularz przy kliknięciu poza nim
+document.addEventListener('click', function(event) {
+    const popup = document.getElementById('contact-popup-fab');
+    const bubble = document.querySelector('.contact-bubble-fab');
+
+    // Sprawdzamy, czy formularz jest otwarty
+    if (popup.classList.contains('active')) {
+        // Jeśli kliknięcie NIE nastąpiło wewnątrz popupu ORAZ nie nastąpiło w ikonkę chmurki
+        if (!popup.contains(event.target) && !bubble.contains(event.target)) {
+            popup.classList.remove('active');
+        }
+    }
+});
