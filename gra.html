@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <title>Tarot & Doradztwo Duchowe - Magia i gry</title>
+    <meta name="description" content="Chwila relaksu w magicznym klimacie. Zagraj w tematyczne gry i poczuj energię kart tarota. Sprawdź swoją intuicję!">
+    <title>Magia i Rozrywka - Zagraj w Karty | Petter-tarot</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -25,13 +26,13 @@
             <li><a href="index.html#cennik" onclick="toggleMenu()">Cennik</a></li>
             <li><a href="rytualy.html#rytualy" onclick="toggleMenu()">Rytuały</a></li>
             <li><a href="ksiega.html#ksiega" onclick="toggleMenu()">Księga wpisów</a></li>
-            <li><a href="index.html#kontakt" onclick="toggleMenu()">Kontakt</a></li>
-            <li><a href="gra.html#gra" target="_blank">Magia i Gra</a></li>
+            <li><a href="gra.html#kontakt" onclick="toggleMenu()">Kontakt</a></li>
+            <li><a href="gra.html#gra" target="_blank">Rozrywka</a></li>
             <li><a href="https://bornself.pl/" target="_blank">Kalkulator Numerologiczny</a></li>
             <li><a href="https://ehoroskop.pl/ascendant" target="_blank">Kalkulator Ascendentu</a></li>
             <li class="bk-wrapper">
                 <a href="https://buycoffee.to/petter_tarot" target="_blank" class="nav-bk">
-                    <i class="fas fa-coffee"></i> POSTAW KAWĘ
+                    <i class="fas fa-coffee"></i><a class="nav-bk"></a>POSTAW KAWĘ</a>
                 </a>
             </li>
         </ul>
@@ -87,6 +88,32 @@
             </a>
         </div>
     </div>
+    
+    <div class="contact-bubble-fab" onclick="toggleFloatingContactForm()">
+        <i class="fas fa-envelope"></i>
+    </div>
+
+        <div id="contact-popup-fab" class="contact-popup-fab">
+        <div class="popup-header-fab">
+        <span>Napisz do mnie</span>
+        <button onclick="toggleFloatingContactForm()">&times;</button>
+    </div>
+    <form action="https://formsubmit.co/slodki8925@o2.pl" method="POST" class="popup-form-fab">
+        
+        <input type="hidden" name="_next" value="http://localhost:8383/StronaPietrka/index.html">
+        
+        <input type="hidden" name="_captcha" value="false">
+        
+        <input type="text" name="name" placeholder="Twoje Imię" required>
+        <input type="email" name="email" placeholder="Twój E-mail" required>
+        <textarea name="message" placeholder="W czym mogę pomóc?" required></textarea>
+        
+        <button type="submit">Wyślij wiadomość</button>
+    </form>
+            
+            <form action="https://formsubmit.co/slodki8925@o2.pl" method="POST" class="popup-form-fab">
+    <input type="hidden" name="_next" value="https://twoja-strona.pl/index.html">     
+</div>
 
     <footer class="footer-strip">
         <div class="stars-overlay"></div>
