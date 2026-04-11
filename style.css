@@ -943,7 +943,7 @@ h2 {
 /* GŁÓWNY KONTENER SZUFLADY */
 .contact-popup-fab {
     position: fixed;
-    bottom: 2%;
+    bottom: 5%;
     right: -340px; /* Całkowicie schowany formularz */
     width: 340px;
     background: #0b0b0b;
