@@ -236,6 +236,8 @@ h1 {
     margin-bottom: 40px;
 }
 
+
+
 .main-title {
     font-family: 'Cinzel', serif;
     font-size: clamp(20px, 8vw, 30px);
@@ -938,184 +940,132 @@ h2 {
 
 /* --- PŁYWAJĄCA CHMURKA KONTAKTU (FAB) --- */
 
-/* Ikonka chmurki w prawym dolnym rogu */
-.contact-bubble-fab {
+/* GŁÓWNY KONTENER SZUFLADY */
+.contact-popup-fab {
     position: fixed;
-    bottom: 25px;
-    right: 25px; /* Przeniesiona na prawą stronę */
-    width: 50px;
-    height: 50px;
-    background: #cbb98a; /* Twoje złoto (jak w h1) */
-    border-radius: 50%;
+    top: 50%;
+    right: -340px; /* Całkowicie schowany formularz */
+    transform: translateY(-50%);
+    width: 340px;
+    background: #0b0b0b;
+    border: 1px solid #cbb98a;
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    z-index: 10000;
+    box-shadow: -15px 0 40px rgba(0, 0, 0, 0.7);
+    transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Kiedy szuflada jest wysunięta */
+.contact-popup-fab.active {
+    right: 0;
+}
+
+/* METKA (WIELKOŚĆ HAMBURGERA) */
+.contact-bubble-fab {
+    position: absolute;
+    left: -45px; /* Szerokość metki */
+    top: 75%;      /* Możesz ustawić top: 0, aby metka była w linii z górą formularza, lub 50% */
+    width: 45px;
+    height: 45px;
+    background: #cbb98a;
+    border-radius: 12px 0 0 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
-    color: #000; /* Czarna ikonka dla kontrastu na złocie */
     cursor: pointer;
-    z-index: 10000; /* Nad wszystkimi elementami */
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.contact-bubble-fab:hover {
-    transform: scale(1.1) rotate(-5deg);
-    filter: drop-shadow(0 0 8px rgba(224, 206, 158, 0.8));
-}
-
-/* Okno formularza kontaktowego */
-.contact-popup-fab {
-    position: fixed;
-    bottom: 100px;
-    right: 50px; /* Nad chmurką, po prawej stronie */
-    width: 320px;
-    background: #0b0b0b; /* Bardzo ciemne tło (pasujące do cennika) */
-    border: 1px solid rgba(224, 206, 158, 0.4);
-    border-radius: 18px;
-    display: none; /* Początkowo ukryte */
-    flex-direction: column;
-    z-index: 9999;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.7);
-    overflow: hidden;
-    animation: slideInFab 0.3s ease-out;
-}
-
-/* Stan aktywny (dodawany przez JavaScript) */
-.contact-popup-fab.active {
-    display: flex;
-}
-
-/* Nagłówek okienka kontaktowego */
-.popup-header-fab {
-    background: #e0ce9e; /* Twoje złoto */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
     color: #000;
-    padding: 12px 18px;
+}
+
+.contact-bubble-fab svg {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.contact-bubble-fab:hover svg {
+    transform: scale(1.1);
+}
+
+/* RESZTA FORMULARZA (Luksusowy design) */
+.popup-header-fab {
+    padding: 25px 25px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.popup-header-fab h3 {
     font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 14px;
+    color: #e0ce9e;
+    margin: 0;
+    font-size: 16px;
     letter-spacing: 1px;
 }
 
 .popup-header-fab button {
     background: none;
     border: none;
+    color: #cbb98a;
     font-size: 24px;
-    color: #000;
     cursor: pointer;
-    transition: color 0.3s ease;
 }
 
-.popup-header-fab button:hover {
-    color: #fff;
-}
-
-/* Sam formularz wewnątrz okienka */
 .popup-form-fab {
-    padding: 20px;
+    padding: 0 25px 30px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
 }
 
-.popup-form-fab input, 
-.popup-form-fab textarea {
-    background: rgba(255,255,255,0.03); /* Bardzo subtelne tło */
-    border: 1px solid rgba(224, 206, 158, 0.2);
-    padding: 12px 15px;
+/* PŁYWAJĄCE ETYKIETY */
+.input-group {
+    position: relative;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(203, 185, 138, 0.3);
     color: #fff;
-    border-radius: 8px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.popup-form-fab input:focus, 
-.popup-form-fab textarea:focus {
     outline: none;
-    border-color: #e0ce9e; /* Pełne złoto po kliknięciu */
-    box-shadow: 0 0 10px rgba(224, 206, 158, 0.2);
+    font-family: 'Montserrat', sans-serif;
 }
 
-.popup-form-fab textarea {
-    resize: none;
-    height: 100px;
+.input-group label {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: 0.3s;
+    pointer-events: none;
+    font-size: 13px;
 }
 
-/* Przycisk wyślij */
-.popup-form-fab button {
-    background: #e0ce9e; /* Twoje złoto */
+.input-group input:focus ~ label,
+.input-group input:valid ~ label,
+.input-group textarea:focus ~ label,
+.input-group textarea:valid ~ label {
+    top: -15px;
+    font-size: 11px;
+    color: #cbb98a;
+}
+
+.submit-btn-fab {
+    background: #cbb98a;
     border: none;
     padding: 12px;
-    cursor: pointer;
+    font-family: 'Cinzel', serif;
     font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.submit-btn-fab:hover {
+    background: #fff;
     color: #000;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.popup-form-fab button:hover {
-    background: #fff; /* Biały po najechaniu */
-}
-
-.popup-form-fab button:active {
-    transform: scale(0.98); /* Efekt wciśnięcia */
-}
-
-/* Animacja wjazdu okienka */
-@keyframes slideInFab {
-    from { opacity: 0; transform: translateY(30px) scale(0.9); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* Responsywność dla małych ekranów */
-@media (max-width: 480px) {
-    .contact-popup-fab {
-        width: 90%;
-        right: 5%;
-        left: 5%;
-        bottom: 95px;
-    }
-}
-
-/* --- ANIMACJA PULSOWANIA DLA IKONKI KONTAKTU --- */
-
-/* 1. Definicja animacji (Klatki kluczowe) */
-@keyframes pulse-gold {
-    0% {
-        /* Stan początkowy: normalny rozmiar, standardowy cień */
-        transform: scale(1);
-        box-shadow: 0 5px 15px rgba(224, 206, 158, 0.3);
-    }
-    50% {
-        /* Środek animacji: lekko powiększony, mocniejsza złota poświata */
-        transform: scale(1.05); /* Powiększenie o 5% */
-        box-shadow: 0 8px 25px rgba(224, 206, 158, 0.6); /* Mocniejszy, złoty cień */
-    }
-    100% {
-        /* Powrót do stanu początkowego */
-        transform: scale(1);
-        box-shadow: 0 5px 15px rgba(224, 206, 158, 0.3);
-    }
-}
-
-/* 2. Przypisanie animacji do klasy przycisku kontaktu */
-.contact-bubble-fab {
-    /* ... (reszta Twoich stylów dla tej klasy) ... */
-    
-    /* DODAJ TĘ LINIKĘ: */
-    animation: pulse-gold 2s infinite ease-in-out; /* Nazwa, czas trwania, nieskończona pętla, płynne przejście */
-}
-
-/* 3. Opcjonalnie: Wyłączenie pulsowania po najechaniu myszką (Hover) */
-.contact-bubble-fab:hover {
-    /* ... (reszta Twoich stylów dla hover) ... */
-    
-    /* DODAJ TĘ LINIKĘ: */
-    animation: none !important; /* Przestaje pulsować, gdy użytkownik chce kliknąć */
-    transform: translateY(-3px) scale(1.03) !important; /* Zachowujemy lekkie uniesienie z poprzedniego stylu */
 }
