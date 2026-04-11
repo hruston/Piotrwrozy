@@ -1050,7 +1050,7 @@ h2 {
 .input-group textarea:focus ~ label,
 .input-group textarea:valid ~ label {
     top: -15px;
-    font-size: 13px;
+    font-size: 16px;
     color: #cbb98a;
 }
 
