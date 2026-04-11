@@ -263,43 +263,26 @@
             </a>
         </div>
     </div>
-</div>
-    
-    
-    <div id="contact-popup-fab" class="contact-popup-fab">
-    <div class="contact-bubble-fab" onclick="toggleFloatingContactForm()">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </div>
 
+
+<div class="contact-bubble-fab" onclick="toggleFloatingContactForm()">
+    <i class="fas fa-envelope"></i>
+</div>
+
+<div id="contact-popup-fab" class="contact-popup-fab">
     <div class="popup-header-fab">
-        <h3>Napisz do mnie</h3>
+        <span>Napisz do mnie</span>
         <button onclick="toggleFloatingContactForm()">&times;</button>
     </div>
-    
-    <form class="popup-form-fab" action="https://formsubmit.co/slodki8925@o2.pl" method="POST">
+    <form action="https://formsubmit.co/slodki8925@o2.pl" method="POST" class="popup-form-fab">
+        <input type="hidden" name="_next" value="https://hruston.github.io/Piotrwrozy/dziekuje.html">
+        <input type="hidden" name="_captcha" value="false">
         
-        <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://hruston.github.io/Piotrwrozy/"> <div class="input-group">
-            <input type="text" name="name" id="fab-name" required>
-            <label for="fab-name">Imię</label>
-        </div>
+        <input type="text" name="name" placeholder="Twoje Imię" required>
+        <input type="email" name="email" placeholder="Twój E-mail" required>
+        <textarea name="message" placeholder="W czym mogę pomóc?" required></textarea>
         
-        <div class="input-group">
-            <input type="email" name="email" id="fab-email" required>
-            <label for="fab-email">Twój e-mail</label>
-        </div>
-        
-        <div class="input-group">
-            <textarea name="message" id="fab-message" required></textarea>
-            <label for="fab-message">Wiadomość...</label>
-        </div>
-        
-        <button type="submit" class="submit-btn-fab">
-            <span>Wyślij wiadomość</span>
-        </button>
+        <button type="submit">Wyślij wiadomość</button>
     </form>
 </div>
     
