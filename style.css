@@ -943,8 +943,8 @@ h2 {
     position: fixed;
     bottom: 25px;
     right: 25px; /* Przeniesiona na prawą stronę */
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
     background: #cbb98a; /* Twoje złoto (jak w h1) */
     border-radius: 50%;
     display: flex;
