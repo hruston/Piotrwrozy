@@ -143,14 +143,14 @@ html {
 
 html {
     scroll-behavior: smooth;
-    overscroll-behavior-y: none; /* Zatrzymuje efekt sprężynowania na telefonach */
-    background-color: #000;
+    background-color: #0b0b0b;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: #000;
+    background-color: transparent; /* Transparent naprawia znikające tło z gwiazdami */
+    overscroll-behavior-y: none; /* Delikatna blokada sprężynowania dla nowszych telefonów */
     color: #e0ce9e;
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
@@ -477,16 +477,6 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.footer-strip::after {
-    content: '';
-    position: absolute;
-    top: 100%; /* Zaczyna się równo z dolną krawędzią footera */
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Gwarantuje, że przykryje wszystko pod spodem */
-    background-color: #0b0b0b; /* Kolor footera / tła */
 }
 
 .footer-text {
