@@ -1069,3 +1069,12 @@ h2 {
     background: #e0ce9e;
     color: #000;
 }
+
+/* Zapobiega powiększaniu na iPhone */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+    font-size: 16px !important;
+}
