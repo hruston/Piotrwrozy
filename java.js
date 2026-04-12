@@ -128,9 +128,10 @@ function prevPage() {
 // Formularz kontaktowy
 
 /* --- Obsługa pływającej chmurki kontaktu (FAB) --- */
-// Funkcja otwierająca/zamykająca formularz po kliknięciu w ikonkę
+
 function toggleFloatingContactForm() {
     const popup = document.getElementById('contact-popup-fab');
+    // Dodaje lub usuwa klasę .active, która w CSS ma display: flex
     popup.classList.toggle('active');
 }
 
@@ -146,4 +147,5 @@ document.addEventListener('click', function(event) {
             popup.classList.remove('active');
         }
     }
-});
+})
+
