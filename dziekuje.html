@@ -1,15 +1,156 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>Dziękuję za kontakt</div>
-    </body>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dziękuję za Wiadomość - Petter-tarot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background-color: #0a0a0a; /* Spójne z ciemnym motywem */
+            z-index: 100; 
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .thank-you-container {
+            padding: 40px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #e0ce9e; /* Złota ramka */
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.2);
+            max-width: 500px;
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 300; 
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: #e0ce9e;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #e0ce9e;
+            color: #000;
+            text-decoration: none;
+            font-family: Cinzel, serif;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-btn:hover {
+            background-color: #fff;
+            box-shadow: 0 0 15px #e0ce9e;
+            transform: translateY(-2px);
+        }
+
+        .icon-spirit {
+            font-size: 3rem;
+            color: #c85a5a;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        
+        /* Gwiazdki */
+        
+        #star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200; 
+    pointer-events: none; 
+    overflow: hidden;
+}
+
+.star-particle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.5;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100vh); } /* Ruch do góry */
+}
+        
+    </style>
+</head>
+<body>
+    
+    <div id="star-field"></div>
+
+    <div class="bg-fixed-layer"></div>
+
+    <div class="thank-you-container">
+        <i class="fa-solid fa-sparkles icon-spirit"></i>
+        <h1>Dziękuję!</h1>
+        <p>Twoja wiadomość została wysłana pomyślnie. <br> Odpowiem na nią najszybciej, jak to możliwe.<br> Niech gwiazdy Ci sprzyjają.</p>
+        
+        <a href="index.html" class="back-btn">Powrót do strony głównej</a>
+    </div>
+
+    <script>function initStars() {
+    const field = document.getElementById('star-field');
+    if (!field) return;
+
+    const starCount = 100; // Ile gwiazdek ma być na ekranie
+
+    for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star-particle';
+        
+        // Losowe parametry
+        const size = Math.random() * 3 + 'px';
+        const posX = Math.random() * 100 + '%';
+        const posY = Math.random() * 100 + '%';
+        const duration = Math.random() * 50 + 20 + 's'; // Prędkość lotu (20-70 sekund)
+        const delay = Math.random() * -50 + 's'; // Losowy start, żeby nie leciały wszystkie naraz
+
+        star.style.width = size;
+        star.style.height = size;
+        star.style.left = posX;
+        star.style.top = posY;
+        star.style.animationDuration = duration;
+        star.style.animationDelay = delay;
+        star.style.opacity = Math.random();
+
+        field.appendChild(star);
+    }
+}
+
+// Uruchom po załadowaniu strony
+window.addEventListener('DOMContentLoaded', initStars);</script>
+    
+</body>
 </html>
