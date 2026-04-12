@@ -305,7 +305,7 @@ h2 {
 }
 
 .item-name {
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: 1.5px;
 }
 
@@ -317,7 +317,7 @@ h2 {
 
 .price {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     color: #fff;
     white-space: nowrap;
 }
@@ -337,7 +337,7 @@ h2 {
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.45s ease, opacity 0.3s ease, margin-top 0.3s ease;
-    font-size: 13px;
+    font-size: 14px;
     color: #cbb98a;
     line-height: 1.45;
     text-align: left;
