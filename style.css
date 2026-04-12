@@ -51,7 +51,7 @@ html {
     backdrop-filter: blur(15px);
     z-index: 1001;
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    padding-top: 80px;
+    padding-top: 60px;
     border-right: 1px solid rgba(224, 206, 158, 0.2);
 }
 
@@ -268,7 +268,7 @@ h1 {
 
 h2 {
     font-family: 'Cinzel', serif;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 4px;
     margin: 60px 0 25px;
     opacity: 0.9;
@@ -337,7 +337,7 @@ h2 {
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.45s ease, opacity 0.3s ease, margin-top 0.3s ease;
-    font-size: 14px;
+    font-size: 13px;
     color: #cbb98a;
     line-height: 1.45;
     text-align: left;
@@ -374,6 +374,15 @@ h2 {
     margin: 0 auto;
     width: 90%;
     text-align: center;
+}
+
+.pricer-info{
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    letter-spacing: 4px;
+    margin: 60px 0 25px;
+    opacity: 0.9;
+    color: #fff;
 }
 
 .gold-accent {
